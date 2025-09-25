@@ -25,16 +25,15 @@ function loadList() {
 }
 
 // Beim Laden der Seite aufrufen
-window.addEventListener('DOMContentLoaded', loadList);
-
-document.addEventListener("DOMContentLoaded", () => {
+window.addEventListener("DOMContentLoaded", function () {
   const cards = document.querySelectorAll(".card");
   const frame = document.getElementById("plan-frame");
 
   cards.forEach(card => {
-    card.addEventListener("click", () => {
-      const url = card.dataset.url;
-      frame.src = url; // lädt HTML ins iframe
+    card.addEventListener("click", function () {
+      const url = this.dataset.url;
+      console.log("Lade:", url); // Debug-Ausgabe
+      frame.src = url;
     });
   });
 });
