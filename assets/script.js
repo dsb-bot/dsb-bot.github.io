@@ -26,3 +26,16 @@ function loadList() {
 
 // Beim Laden der Seite aufrufen
 window.addEventListener('DOMContentLoaded', loadList);
+
+document.addEventListener("DOMContentLoaded", () => {
+  const cards = document.querySelectorAll(".card");
+  const frame = document.getElementById("plan-frame");
+
+  cards.forEach(card => {
+    card.addEventListener("click", e => {
+      e.preventDefault(); // verhindert Seitenwechsel
+      const url = card.getAttribute("href");
+      frame.src = url; // lädt den Link ins iframe
+    });
+  });
+});
