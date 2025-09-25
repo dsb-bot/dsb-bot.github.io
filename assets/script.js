@@ -32,10 +32,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const frame = document.getElementById("plan-frame");
 
   cards.forEach(card => {
-    card.addEventListener("click", e => {
-      e.preventDefault(); // verhindert Seitenwechsel
-      const url = card.getAttribute("href");
-      frame.src = url; // lädt den Link ins iframe
+    card.addEventListener("click", () => {
+      const url = card.dataset.url;
+      frame.src = url; // lädt HTML ins iframe
     });
   });
 });
