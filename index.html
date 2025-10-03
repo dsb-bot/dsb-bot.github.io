@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 
-<body class="space">
+<body>
   <div class="container">
     <h1>Vertretungspläne</h1>
 
@@ -22,56 +22,6 @@
 
     <!-- Plan List Container -->
     <div id="list-container"></div>
-
-    <h2>Über DSB-Bot</h2>
-    <div class="list">
-
-      <div class="text-card">
-        <h2>Information</h2>
-        <p>Diese Seite ist noch im Bau und Fehler können auftreten.</p>
-        <p>Bitte überprüfe immer DSB-Mobile, wenn der Stand der Pläne etwas älter ist. Vielleicht hat etwas nicht
-          geklappt, wie es soll.</p>
-      </div>
-
-      <div class="text-card">
-        <h2>Funktionen</h2>
-        <p>
-        <ul>
-          <li>Automatisches Laden und Speichern der Pläne</li>
-          <li>Klicke auf einen Plan, um ihn anzuzeigen.</li>
-          <li>Verschiedene Designs zur Auswahl</li>
-        </ul>
-        </p>
-      </div>
-
-      <div class="text-card">
-        <h2>Ankündigungen</h2>
-        <p>Neue Funktionen sind da!</p>
-        <ul>
-          <li>Ab jetzt ist das Design auf mehr Geräten nutzbar und der Weg ist frei für viele weitere Updates.</li>
-          <li>Die Pläne werden jetzt in einem Popup-Fenster angezeigt, was die Bedienung auf Mobilgeräten deutlich
-            verbessert.</li>
-          <li>Es gibt jetzt drei verschiedene Designs, die du über die Buttons oben wechseln kannst.</li>
-        </ul>
-        <br>
-        <p>Upcomming Features...</p>
-        <ul>
-          <li>Ein Konfettiknopf, wenn Du Entfall hast</li>
-          <li>Mehr Designs</li>
-          <li>Die Designs werden in einem eigenen Menu sein</li>
-          <li>Historie über alle Pläne</li>
-          <li>Deine Vorschläge</li>
-          <p></p>
-      </div>
-
-      <div class="card">
-        <h2>Zitat des Tages</h2>
-        <p>
-          <script type="text/javascript" src="http://www.tageszitate.de/zitat.js"></script>
-        </p>
-      </div>
-    </div>
-
 
     <!-- Iframe Popup -->
     <div id="iframe-popup"
@@ -86,18 +36,60 @@
 
   </div>
 
+  <h2>Über DSB-Bot</h2>
+  <div class="list">
 
-  <footer>
-    <div class="footer-text">
-      DSB-Bot by Jokko - &copy; 2025 All rights reserved.<br>
-    <a href="./imprint.html" class="footer-text">Impressum</a>
-    <a href="./privacy.html" class="footer-text">Datenschutz</a>
-    <br>
+    <div class="text-card">
+      <h2>Information</h2>
+      <p>Diese Seite ist noch im Bau und Fehler können auftreten.</p>
+      <p>Bitte überprüfe immer DSB-Mobile, wenn der Stand der Pläne etwas älter ist. Vielleicht hat etwas nicht
+        geklappt, wie es soll.</p>
     </div>
-  </footer>
+
+    <div class="text-card">
+      <h2>Funktionen</h2>
+      <p>
+      <ul>
+        <li>Automatisches Laden und Speichern der Pläne</li>
+        <li>Klicke auf einen Plan, um ihn anzuzeigen.</li>
+        <li>Verschiedene Designs zur Auswahl</li>
+      </ul>
+      </p>
+    </div>
+
+    <div class="text-card">
+      <h2>Ankündigungen</h2>
+      <p>Neue Funktionen sind da!</p>
+      <ul>
+        <li>Ab jetzt ist das Design auf mehr Geräten nutzbar und der Weg ist frei für viele weitere Updates.</li>
+        <li>Die Pläne werden jetzt in einem Popup-Fenster angezeigt, was die Bedienung auf Mobilgeräten deutlich
+          verbessert.</li>
+        <li>Es gibt jetzt drei verschiedene Designs, die du über die Buttons oben wechseln kannst.</li>
+      </ul>
+      <br>
+      <p>Upcomming Features...</p>
+      <ul>
+        <li>Ein Konfettiknopf, wenn Du Entfall hast</li>
+        <li>Mehr Designs</li>
+        <li>Die Designs werden in einem eigenen Menu sein</li>
+        <li>Historie über alle Pläne</li>
+        <li>Deine Vorschläge</li>
+        <p></p>
+    </div>
+
+    <div class="card">
+      <h2>Zitat des Tages</h2>
+      <p>
+        <script type="text/javascript" src="http://www.tageszitate.de/zitat.js"></script>
+      </p>
+    </div>
+  </div>
 
   <script src="assets/js/script.js"></script>
   <script src="assets/js/theme.js"></script>
+  <script src="assets/js/loadPlan.js"></script>
 </body>
+
+<footer id="footer"></footer>
 
 </html>
