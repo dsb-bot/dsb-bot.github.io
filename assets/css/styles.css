@@ -19,16 +19,22 @@ body {
   min-height: 100vh;
   background-color: var(--bg-color);
   background-image: var(--background-image);
-  background-size: cover; /* Füllt den gesamten Hintergrund */
-  background-attachment: fixed; /* Fixiert das Bild */
-  background-position: center; /* Zentriert das Bild */
-  background-repeat: no-repeat; /* Verhindert Wiederholung */
+  background-size: cover;
+  background-attachment: scroll;
+  background-position: center;
+  background-repeat: no-repeat;
   overflow-x: hidden;
   will-change: transform;
-
   transition: background-color var(--transition-duration) ease,
               color var(--transition-duration) ease;
 }
+
+@supports (-webkit-touch-callout: none) {
+  body {
+    background-attachment: scroll !important;
+  }
+}
+
 
 /* Safari-Fix für Hintergrundbild
 body::before {
