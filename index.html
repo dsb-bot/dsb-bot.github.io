@@ -34,96 +34,95 @@
       </div>
     </div>
 
-  </div>
+    <h2>Über DSB-Bot</h2>
+    <div class="list">
 
-  <h2>Über DSB-Bot</h2>
-  <div class="list">
+      <div class="text-card">
+        <h2>Information</h2>
+        <p>Diese Seite ist noch im Bau und Fehler können auftreten.</p>
+        <p>Bitte überprüfe immer DSB-Mobile, wenn der Stand der Pläne etwas älter ist. Vielleicht hat etwas nicht
+          geklappt, wie es soll.</p>
+      </div>
 
-    <div class="text-card">
-      <h2>Information</h2>
-      <p>Diese Seite ist noch im Bau und Fehler können auftreten.</p>
-      <p>Bitte überprüfe immer DSB-Mobile, wenn der Stand der Pläne etwas älter ist. Vielleicht hat etwas nicht
-        geklappt, wie es soll.</p>
-    </div>
+      <div class="text-card">
+        <h2>Funktionen</h2>
+        <p>
+        <ul>
+          <li>Automatisches Laden und Speichern der Pläne</li>
+          <li>Klicke auf einen Plan, um ihn anzuzeigen.</li>
+          <li>Verschiedene Designs zur Auswahl</li>
+        </ul>
+        </p>
+      </div>
 
-    <div class="text-card">
-      <h2>Funktionen</h2>
-      <p>
-      <ul>
-        <li>Automatisches Laden und Speichern der Pläne</li>
-        <li>Klicke auf einen Plan, um ihn anzuzeigen.</li>
-        <li>Verschiedene Designs zur Auswahl</li>
-      </ul>
-      </p>
-    </div>
+      <div class="text-card">
+        <h2>Ankündigungen</h2>
+        <p>Neue Funktionen sind da!</p>
+        <ul>
+          <li>Ab jetzt ist das Design auf mehr Geräten nutzbar und der Weg ist frei für viele weitere Updates.</li>
+          <li>Die Pläne werden jetzt in einem Popup-Fenster angezeigt, was die Bedienung auf Mobilgeräten deutlich
+            verbessert.</li>
+          <li>Es gibt jetzt drei verschiedene Designs, die du über die Buttons oben wechseln kannst.</li>
+        </ul>
+        <br>
+        <p>Upcomming Features...</p>
+        <ul>
+          <li>Ein Konfettiknopf, wenn Du Entfall hast</li>
+          <li>Mehr Designs</li>
+          <li>Die Designs werden in einem eigenen Menu sein</li>
+          <li>Historie über alle Pläne</li>
+          <li>Deine Vorschläge</li>
+        </ul>
+      </div>
 
-    <div class="text-card">
-      <h2>Ankündigungen</h2>
-      <p>Neue Funktionen sind da!</p>
-      <ul>
-        <li>Ab jetzt ist das Design auf mehr Geräten nutzbar und der Weg ist frei für viele weitere Updates.</li>
-        <li>Die Pläne werden jetzt in einem Popup-Fenster angezeigt, was die Bedienung auf Mobilgeräten deutlich
-          verbessert.</li>
-        <li>Es gibt jetzt drei verschiedene Designs, die du über die Buttons oben wechseln kannst.</li>
-      </ul>
-      <br>
-      <p>Upcomming Features...</p>
-      <ul>
-        <li>Ein Konfettiknopf, wenn Du Entfall hast</li>
-        <li>Mehr Designs</li>
-        <li>Die Designs werden in einem eigenen Menu sein</li>
-        <li>Historie über alle Pläne</li>
-        <li>Deine Vorschläge</li>
-      </ul>
-    </div>
+      <div class="card" id="quote-card">
+        <h2>Zitat des Tages</h2>
+        <blockquote id="quote-text" style="font-style:italic; margin:0.5rem 0;"></blockquote>
+        <p id="quote-author" style="text-align:right; font-weight:600;"></p>
+      </div>
 
-    <div class="card" id="quote-card">
-      <h2>Zitat des Tages</h2>
-      <blockquote id="quote-text" style="font-style:italic; margin:0.5rem 0;"></blockquote>
-      <p id="quote-author" style="text-align:right; font-weight:600;"></p>
-    </div>
+      <script src="http://www.zitate-online.de/zitatdestages.js"></script>
 
-    <script src="http://www.zitate-online.de/zitatdestages.js"></script>
+      <script>
+        (function () {
+          const zitatDiv = document.getElementById("zitatdestages");
+          if (zitatDiv) {
+            // Roh-HTML in Text umwandeln (alle Tags weg)
+            const temp = document.createElement("div");
+            temp.innerHTML = zitatDiv.innerHTML;
+            const rawText = temp.textContent.trim();
 
-    <script>
-      (function () {
-        const zitatDiv = document.getElementById("zitatdestages");
-        if (zitatDiv) {
-          // Roh-HTML in Text umwandeln (alle Tags weg)
-          const temp = document.createElement("div");
-          temp.innerHTML = zitatDiv.innerHTML;
-          const rawText = temp.textContent.trim();
+            // Erwartetes Format: "Autor: „Zitat“"
+            const parts = rawText.split(":");
+            let author = "";
+            let quote = "";
 
-          // Erwartetes Format: "Autor: „Zitat“"
-          const parts = rawText.split(":");
-          let author = "";
-          let quote = "";
+            if (parts.length > 1) {
+              author = parts[0].trim();
+              quote = parts.slice(1).join(":").trim();
+            } else {
+              quote = rawText;
+            }
 
-          if (parts.length > 1) {
-            author = parts[0].trim();
-            quote = parts.slice(1).join(":").trim();
+            // HTML-Entities ersetzen
+            quote = quote
+              .replace(/&bdquo;/g, "„")
+              .replace(/&ldquo;/g, "“")
+              .replace(/&quot;/g, '"')
+              .replace(/&amp;/g, "&");
+
+            // In Card einsetzen
+            document.getElementById("quote-text").textContent = quote;
+            document.getElementById("quote-author").textContent = author;
+
+            // Originalblock entfernen
+            zitatDiv.remove();
           } else {
-            quote = rawText;
+            document.getElementById("quote-text").textContent = "Zitat konnte nicht geladen werden.";
           }
-
-          // HTML-Entities ersetzen
-          quote = quote
-            .replace(/&bdquo;/g, "„")
-            .replace(/&ldquo;/g, "“")
-            .replace(/&quot;/g, '"')
-            .replace(/&amp;/g, "&");
-
-          // In Card einsetzen
-          document.getElementById("quote-text").textContent = quote;
-          document.getElementById("quote-author").textContent = author;
-
-          // Originalblock entfernen
-          zitatDiv.remove();
-        } else {
-          document.getElementById("quote-text").textContent = "Zitat konnte nicht geladen werden.";
-        }
-      })();
-    </script>
+        })();
+      </script>
+    </div>
 
   </div>
 
