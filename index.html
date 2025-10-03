@@ -77,12 +77,54 @@
       </ul>
     </div>
 
-    <div class="card">
+    <div class="card" id="quote-card">
       <h2>Zitat des Tages</h2>
-      <p>
-        <script type="text/javascript" src="http://www.tageszitate.de/zitat.js"></script>
-      </p>
+      <blockquote id="quote-text" style="font-style:italic; margin:0.5rem 0;"></blockquote>
+      <p id="quote-author" style="text-align:right; font-weight:600;"></p>
     </div>
+
+    <script src="http://www.zitate-online.de/zitatdestages.js"></script>
+
+    <script>
+      (function () {
+        const zitatDiv = document.getElementById("zitatdestages");
+        if (zitatDiv) {
+          // Roh-HTML in Text umwandeln (alle Tags weg)
+          const temp = document.createElement("div");
+          temp.innerHTML = zitatDiv.innerHTML;
+          const rawText = temp.textContent.trim();
+
+          // Erwartetes Format: "Autor: „Zitat“"
+          const parts = rawText.split(":");
+          let author = "";
+          let quote = "";
+
+          if (parts.length > 1) {
+            author = parts[0].trim();
+            quote = parts.slice(1).join(":").trim();
+          } else {
+            quote = rawText;
+          }
+
+          // HTML-Entities ersetzen
+          quote = quote
+            .replace(/&bdquo;/g, "„")
+            .replace(/&ldquo;/g, "“")
+            .replace(/&quot;/g, '"')
+            .replace(/&amp;/g, "&");
+
+          // In Card einsetzen
+          document.getElementById("quote-text").textContent = quote;
+          document.getElementById("quote-author").textContent = author;
+
+          // Originalblock entfernen
+          zitatDiv.remove();
+        } else {
+          document.getElementById("quote-text").textContent = "Zitat konnte nicht geladen werden.";
+        }
+      })();
+    </script>
+
   </div>
 
   <script src="assets/js/script.js"></script>
