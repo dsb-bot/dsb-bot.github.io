@@ -14,7 +14,7 @@ html[data-theme="brown"] {
   --text-color: #fbe4d4;
   --base-bg: rgba(95,58,30,0.6);
   --base-hover-bg: rgba(114,76,43,0.7);
-  --background-image: url("../images/orange_background.jpg");
+  --background-image: url("../images/brown_background.jpg");
 }
 
 /* Pink Theme */
