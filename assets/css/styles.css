@@ -29,6 +29,61 @@
   transition: background-image var(--transition-duration) ease, filter var(--transition-duration) ease;
 }
 
+.navbar {
+  margin-top: 1rem;
+  width: calc(100% - 4rem);
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  display: flex;
+  border-radius: 12px;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background-color: var(--base-bg);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  
+}
+
+.navbar.scrolled {
+  background-color: var(--base-bg);
+  background-color: color(from var(--base-bg) srgb r g b / 1);
+  transition: background-color 0.3s ease;
+}
+
+.navbar a {
+  text-decoration: none;
+  color: var(--text-color);
+  font-size: 1rem;
+  transition: color 0.3s ease;
+}
+
+.navbar a:hover {
+  color: var(--base-hover-bg);
+}
+
+.navbar-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.navbar-logo img {
+  width: 32px;
+  height: 32px;
+}
+
+.navbar-logo span {
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
 body {
   margin: 0;
   font-family: "Segoe UI", Roboto, Arial, sans-serif;
@@ -216,6 +271,49 @@ button:hover {
 button:active {
   transform: translateY(0);
   box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+}
+
+/* Dropdown Container */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+/* Dropdown Content */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  right: 0;
+  background-color: var(--base-bg);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+  border-radius: 8px;
+  z-index: 1000;
+  min-width: auto;
+  padding: 0.5rem 0;
+  box-sizing: border-box;
+}
+
+/* Dropdown Buttons */
+.dropdown-content button {
+  width: calc(100% - 1rem);
+  margin: 0 auto;
+  text-align: center;
+  padding: 0.5rem 1rem;
+  border: none;
+  background: none;
+  color: var(--text-color);
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background var(--transition-duration) ease;
+}
+
+.dropdown-content button:hover {
+  background: var(--base-hover-bg);
+}
+
+/* Show Dropdown on Hover */
+.dropdown:hover .dropdown-content {
+  display: block;
 }
 
 @media (max-width: 310px) {
