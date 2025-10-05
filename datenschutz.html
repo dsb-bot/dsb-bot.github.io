@@ -7,6 +7,15 @@
   <title>DSB-Bot</title>
   <link rel="icon" href="assets/images/dsb_logo.png" type="image/png">
   <link rel="stylesheet" href="assets/css/styles.css">
+
+  <script>
+    (function () {
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme) {
+        document.documentElement.setAttribute('data-theme', savedTheme);
+      }
+    })();
+  </script>
 </head>
 
 <body>

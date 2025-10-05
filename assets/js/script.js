@@ -7,8 +7,9 @@ function preloadImages(urls) {
 
 preloadImages([
   "../assets/images/space_background.jpg",
-  "../assets/images/orange_background.jpg",
-  "../assets/images/pink_background.jpg"
+  "../assets/images/brown_background.jpg",
+  "../assets/images/pink_background.jpg",
+  "../assets/images/green_background.jpg"
 ]);
 
 

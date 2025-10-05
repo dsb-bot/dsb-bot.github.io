@@ -7,6 +7,15 @@
   <title>DSB-Bot</title>
   <link rel="icon" href="assets/images/dsb_logo.png" type="image/png">
   <link rel="stylesheet" href="assets/css/styles.css">
+
+  <script>
+    (function () {
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme) {
+        document.documentElement.setAttribute('data-theme', savedTheme);
+      }
+    })();
+  </script>
 </head>
 
 <body>
@@ -40,7 +49,7 @@
       <div class="text-card">
         <h2>Information</h2>
         <p>Diese Seite ist noch im Bau und Fehler können auftreten.</p>
-        <p>Bitte überprüfe immer DSB-Mobile, wenn der Stand der Pläne etwas älter ist. Vielleicht hat etwas nicht
+        <p>Bitte überprüfe immer DSB-Mobile, wenn der Stand der Pläne etwas älter ist. Vielleicht hat etwas nicht so
           geklappt, wie es soll.</p>
       </div>
 
@@ -48,10 +57,9 @@
         <h2>Funktionen</h2>
         <p>
         <ul>
-          <li>Alle vertretungspläne immer verfügbar!</li>
-          <li>Klicke auf einen Plan, um ihn anzuzeigen.</li>
-          <li>Nutze Dein Lieblingstheme für eine noch bessere Nutzererfahrung</li>
-          <li>Plan Historie (seit 11. September 2025)</li>
+          <li>Höhere Vertretungsplan-Verfügbarkeit als in der App!</li>
+          <li>Verschiedene Seiten Themes</li>
+          <li>Plan Historie (ab 11.09.2025)</li>
         </ul>
         </p>
       </div>
@@ -73,7 +81,7 @@
           <li>Die Historie ist jetzt verfügbar! Klicke oben auf "Navigation" -> "Historie", um ältere Pläne anzusehen.
           </li>
         </ul>
-        <br
+        <br>
         <p>Update 02.10.2025</p>
         <ul>
           <li>Alle Themes sind jetzt in der Kopfleiste zu finden.</li>

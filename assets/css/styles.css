@@ -1,13 +1,40 @@
-/* --- Default/Space Theme --- */
+/* Default Theme (Space) */
 :root {
   --bg-color: #0d1b2a;
   --text-color: #e0e6ed;
   --base-bg: rgba(30,58,95,0.6);
   --base-hover-bg: rgba(43,76,114,0.7);
   --background-image: url("../images/space_background.jpg");
-  
   --transition-duration: 0.75s;
 }
+
+/* Orange Theme */
+html[data-theme="brown"] {
+  --bg-color: #2a190d;
+  --text-color: #fbe4d4;
+  --base-bg: rgba(95,58,30,0.6);
+  --base-hover-bg: rgba(114,76,43,0.7);
+  --background-image: url("../images/orange_background.jpg");
+}
+
+/* Pink Theme */
+html[data-theme="pink"] {
+  --bg-color: #2a0d1b;
+  --text-color: #fbd4e4;
+  --base-bg: rgba(95,30,58,0.6);
+  --base-hover-bg: rgba(114,43,76,0.7);
+  --background-image: url("../images/pink_background.jpg");
+}
+
+/* Green Theme */
+html[data-theme="green"] {
+  --bg-color: #0d1a0d;
+  --text-color: #d4fbe4;
+  --base-bg: rgba(30,95,30,0.6);
+  --base-hover-bg: rgba(43,114,43,0.7);
+  --background-image: url("../images/green_background.jpg");
+}
+
 
 .background {
   position: fixed;
@@ -63,14 +90,9 @@
   font-weight: bold;
 }
 
-.navbar-logo img {
-  margin-right: 0.4rem; /* Weniger Abstand zwischen Logo und Text */
-}
-
 /* Dropdowns Container */
 .navbar-dropdowns {
   display: flex;
-  gap: 0.5rem; /* Weniger Abstand zwischen den Dropdowns */
 }
 
 .navbar a {
@@ -87,6 +109,8 @@
 .navbar-logo img {
   width: 32px;
   height: 32px;
+  margin-right: 0rem;
+  border-radius: 16%;
 }
 
 .navbar-logo span {

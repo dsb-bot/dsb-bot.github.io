@@ -22,39 +22,15 @@ function getCookie(name) {
   return "";
 }
 
-// Theme setzen und Cookie speichern
-function setTheme(name) {
-  const root = document.documentElement;
-
-  // Alle Variablen für Theme
-  if (name === 'space') {
-    root.style.setProperty('--bg-color', '#0d1b2a');
-    root.style.setProperty('--text-color', '#e0e6ed');
-    root.style.setProperty('--base-bg', 'rgba(30,58,95,0.6)');
-    root.style.setProperty('--base-hover-bg', 'rgba(43,76,114,0.7)');
-    root.style.setProperty('--background-image', 'url("../images/space_background.jpg")');
-  } else if (name === 'orange') {
-    root.style.setProperty('--bg-color', '#1a1200');
-    root.style.setProperty('--text-color', '#ffe0b2');
-    root.style.setProperty('--base-bg', 'rgba(255,140,0,0.6)');
-    root.style.setProperty('--base-hover-bg', 'rgba(255,165,0,0.7)');
-    root.style.setProperty('--background-image', 'url("../images/orange_background.jpg")');
-  } else if (name === 'pink') {
-    root.style.setProperty('--bg-color', '#330022');
-    root.style.setProperty('--text-color', '#ffc0dd');
-    root.style.setProperty('--base-bg', 'rgba(255,105,180,0.6)');
-    root.style.setProperty('--base-hover-bg', 'rgba(255,20,147,0.7)');
-    root.style.setProperty('--background-image', 'url("../images/pink_background.jpg")');
-  }
-
-  // Cookie setzen für 365 Tage
-  setCookie('theme', name, 365);
+function setTheme(theme) {
+  document.documentElement.setAttribute('data-theme', theme);
+  localStorage.setItem('theme', theme);
 }
 
-// Beim Laden prüfen, ob ein Theme-Cookie existiert
-window.addEventListener('DOMContentLoaded', () => {
-  const savedTheme = getCookie('theme');
-  if (savedTheme) {
-    setTheme(savedTheme);
-  }
+// Beispiel: Theme-Wechsel-Buttons
+document.querySelectorAll('.theme-button').forEach(button => {
+  button.addEventListener('click', () => {
+    const theme = button.dataset.theme;
+    setTheme(theme);
+  });
 });
