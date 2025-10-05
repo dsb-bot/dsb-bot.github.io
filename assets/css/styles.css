@@ -262,6 +262,16 @@ h2 {
   transition: color var(--transition-duration) ease;
 }
 
+.card.hidden {
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.card.fade-in {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
 
 .text-card {
   text-align: left;
