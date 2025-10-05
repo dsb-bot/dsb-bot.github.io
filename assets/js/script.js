@@ -22,6 +22,23 @@ fetch("../assets/html/navbar.html")
   .then(response => response.text())
   .then(data => {
     document.getElementById("navbar").innerHTML = data;
+
+    // Dropdown-Logik erst nach dem Laden der Navbar ausführen
+    const dropdowns = document.querySelectorAll(".dropdown");
+
+    dropdowns.forEach((dropdown) => {
+      const button = dropdown.querySelector(".dropdown-button");
+      button.addEventListener("click", () => {
+        dropdown.classList.toggle("active");
+      });
+
+      // Optional: Schließe das Dropdown, wenn außerhalb geklickt wird
+      document.addEventListener("click", (event) => {
+        if (!dropdown.contains(event.target)) {
+          dropdown.classList.remove("active");
+        }
+      });
+    });
   });
 
 document.addEventListener("DOMContentLoaded", () => {

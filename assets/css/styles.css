@@ -160,6 +160,11 @@
   flex-direction: column;
 }
 
+.dropdown.active .dropdown-content {
+  display: flex;
+  flex-direction: column;
+}
+
 .logo-container {
   display: flex;
   align-items: center;
