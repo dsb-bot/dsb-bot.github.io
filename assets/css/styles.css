@@ -98,6 +98,7 @@
 .dropdown {
   position: relative;
   display: inline-block;
+  padding-bottom: 0.5rem; /* Unsichtbarer Bereich, der die Lücke überbrückt */
 }
 
 /* Dropdown Button */
@@ -125,13 +126,12 @@
   position: absolute;
   right: 0;
   background-color: var(--base-bg);
-  background-color: color(from var(--base-bg) srgb r g b / 0.9);
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
   border-radius: 8px;
   z-index: 1000;
   min-width: fit-content;
-  padding: 0.5rem 0.5rem;
-  margin-top: 0.5rem;
+  padding: 0.5rem;
+  margin-top: 0.5rem; /* Abstand bleibt erhalten */
   box-sizing: border-box;
 }
 
