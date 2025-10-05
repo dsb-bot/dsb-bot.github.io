@@ -35,6 +35,59 @@ html[data-theme="green"] {
   --background-image: url("../images/green_background.jpg");
 }
 
+/* Purple Theme */
+html[data-theme="purple"] {
+  --bg-color: #1a0d2a;
+  --text-color: #e4d4fb;
+  --base-bg: rgba(58,30,95,0.6);
+  --base-hover-bg: rgba(76,43,114,0.7);
+  --background-image: url("../images/purple_background.jpg");
+}
+
+/* Red Theme */
+html[data-theme="red"] {
+  --bg-color: #2a0d0d;
+  --text-color: #fbd4d4;
+  --base-bg: rgba(95,30,30,0.6);
+  --base-hover-bg: rgba(114,43,43,0.7);
+  --background-image: url("../images/red_background.jpg");
+}
+
+/* Cyan Theme */
+html[data-theme="cyan"] {
+  --bg-color: #0d2a2a;
+  --text-color: #d4fbfb;
+  --base-bg: rgba(30,95,95,0.6);
+  --base-hover-bg: rgba(43,114,114,0.7);
+  --background-image: url("../images/cyan_background.jpg");
+}
+
+/* Gold Theme */
+html[data-theme="gold"] {
+  --bg-color: #2a250d;
+  --text-color: #fbf3d4;
+  --base-bg: rgba(95,84,30,0.6);
+  --base-hover-bg: rgba(114,101,43,0.7);
+  --background-image: url("../images/gold_background.jpg");
+}
+
+/* Silver Theme */
+html[data-theme="silver"] {
+  --bg-color: #1f1f1f;
+  --text-color: #e0e0e0;
+  --base-bg: rgba(90,90,90,0.5);
+  --base-hover-bg: rgba(120,120,120,0.7);
+  --background-image: url("../images/silver_background.jpg");
+}
+
+/* Teal Theme */
+html[data-theme="teal"] {
+  --bg-color: #0d2a24;
+  --text-color: #d4fbf1;
+  --base-bg: rgba(30,95,80,0.6);
+  --base-hover-bg: rgba(43,114,96,0.7);
+  --background-image: url("../images/teal_background.jpg");
+}
 
 .background {
   position: fixed;
