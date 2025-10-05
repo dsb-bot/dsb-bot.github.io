@@ -29,26 +29,48 @@
   transition: background-image var(--transition-duration) ease, filter var(--transition-duration) ease;
 }
 
+/* Navbar Container */
 .navbar {
-  margin-top: 1rem;
-  width: calc(100% - 4rem);
-  position: sticky;
-  top: 0;
-  z-index: 999;
   display: flex;
   border-radius: 12px;
   justify-content: space-between;
   align-items: center;
   padding: 1rem;
   background-color: var(--base-bg);
+  border-radius: 12px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  width: calc(100% - 4rem);
+  margin: 0 auto;
+  margin-top: 1rem;
 }
 
 .navbar.scrolled {
   background-color: var(--base-bg);
   background-color: color(from var(--base-bg) srgb r g b / 1);
   transition: background-color 0.3s ease;
+}
+
+/* Logo Container */
+.navbar-logo {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: var(--text-color);
+  font-size: 1rem; /* Schriftgröße von "DSB-Bot" verkleinert */
+  font-weight: bold;
+}
+
+.navbar-logo img {
+  margin-right: 0.4rem; /* Weniger Abstand zwischen Logo und Text */
+}
+
+/* Dropdowns Container */
+.navbar-dropdowns {
+  display: flex;
+  gap: 0.5rem; /* Weniger Abstand zwischen den Dropdowns */
 }
 
 .navbar a {
@@ -62,12 +84,6 @@
   color: var(--base-hover-bg);
 }
 
-.navbar-logo {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
 .navbar-logo img {
   width: 32px;
   height: 32px;
@@ -76,6 +92,72 @@
 .navbar-logo span {
   font-weight: bold;
   font-size: 1.2rem;
+}
+
+/* Dropdown Container */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+/* Dropdown Button */
+.dropdown-button {
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 0.9rem; /* Schriftgröße etwas kleiner */
+  font-weight: 600;
+  padding: 0.4rem 0.8rem; /* Kompakteres Padding */
+  border: none;
+  border-radius: 8px;
+  color: var(--text-color);
+  background: var(--base-bg);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+  transition: all var(--transition-duration) ease;
+}
+
+.dropdown-button:hover {
+  background: var(--base-hover-bg);
+}
+
+/* Dropdown Content */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  right: 0;
+  background-color: var(--base-bg);
+  background-color: color(from var(--base-bg) srgb r g b / 0.9);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+  border-radius: 8px;
+  z-index: 1000;
+  min-width: fit-content;
+  padding: 0.5rem 0.5rem;
+  margin-top: 0.5rem;
+  box-sizing: border-box;
+}
+
+/* Dropdown Buttons */
+.dropdown-content button {
+  width: auto;
+  min-width: fit-content;
+  margin: 0.3rem 0;
+  margin-top: 0.5rem;
+  text-align: center;
+  padding: 0.5rem 1rem;
+  border: none;
+  background-color: var(--base-bg);
+  color: var(--text-color);
+  cursor: pointer;
+  transition: background var(--transition-duration) ease;
+}
+
+.dropdown-content button:hover {
+  background: var(--base-hover-bg);
+}
+
+/* Show Dropdown on Hover */
+.dropdown:hover .dropdown-content {
+  display: flex;
+  flex-direction: column;
 }
 
 .logo-container {
@@ -271,49 +353,6 @@ button:hover {
 button:active {
   transform: translateY(0);
   box-shadow: 0 4px 10px rgba(0,0,0,0.4);
-}
-
-/* Dropdown Container */
-.dropdown {
-  position: relative;
-  display: inline-block;
-}
-
-/* Dropdown Content */
-.dropdown-content {
-  display: none;
-  position: absolute;
-  right: 0;
-  background-color: var(--base-bg);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
-  border-radius: 8px;
-  z-index: 1000;
-  min-width: auto;
-  padding: 0.5rem 0;
-  box-sizing: border-box;
-}
-
-/* Dropdown Buttons */
-.dropdown-content button {
-  width: calc(100% - 1rem);
-  margin: 0 auto;
-  text-align: center;
-  padding: 0.5rem 1rem;
-  border: none;
-  background: none;
-  color: var(--text-color);
-  font-size: 0.95rem;
-  cursor: pointer;
-  transition: background var(--transition-duration) ease;
-}
-
-.dropdown-content button:hover {
-  background: var(--base-hover-bg);
-}
-
-/* Show Dropdown on Hover */
-.dropdown:hover .dropdown-content {
-  display: block;
 }
 
 @media (max-width: 310px) {
