@@ -9,7 +9,12 @@ preloadImages([
   "../assets/images/space_background.jpg",
   "../assets/images/brown_background.jpg",
   "../assets/images/pink_background.jpg",
-  "../assets/images/green_background.jpg"
+  "../assets/images/green_background.jpg",
+  "../assets/images/purple_background.jpg",
+  "../assets/images/red_background.jpg",
+  "../assets/images/cyan_background.jpg",
+  "../assets/images/gold_background.jpg",
+  "../assets/images/silver_background.jpg"
 ]);
 
 
