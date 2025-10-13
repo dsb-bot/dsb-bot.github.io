@@ -11,10 +11,12 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     // Filtere nur gültige HTML-Dateien mit Datum >= heute
     const futureFiles = files.filter(file => {
-      if (!file.name.endsWith(".html")) return false;
-      const datePart = file.name.replace(".html", "");
-      return datePart >= today; // Vergleiche YYYY-MM-DD
-    });
+  if (!file.name.endsWith(".html")) return false;
+  const datePart = file.name.replace(".html", "");
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(datePart)) return false; // Nur echte Datumsnamen
+  return datePart >= today;
+});
+
 
     // Sortiere nach Datum aufsteigend
     futureFiles.sort((a, b) => a.name.localeCompare(b.name));
