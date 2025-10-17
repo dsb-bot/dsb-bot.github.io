@@ -18,8 +18,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const futureFiles = files.filter(file => {
       if (!file.name.endsWith(".html")) return false;
       const datePart = file.name.replace(".html", "");
-      if (!/^\d{4}-\d{2}-\d{2}$/.test(datePart)) return false; // Nur echte Datumsnamen
-      return datePart >= today;
+      return datePart >= today; // Vergleiche YYYY-MM-DD
     });
 
     // Sortiere nach Datum aufsteigend
