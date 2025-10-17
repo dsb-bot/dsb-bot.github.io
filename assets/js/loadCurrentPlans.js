@@ -3,6 +3,11 @@ document.addEventListener("DOMContentLoaded", async () => {
   const apiUrl = "https://api.github.com/repos/dsb-bot/dsb-database/contents/plans";
   const today = new Date().toISOString().split("T")[0];
 
+  // Neues <div class="list"> erzeugen
+  const listDiv = document.createElement("div");
+  listDiv.className = "list";
+  container.appendChild(listDiv);
+
   try {
     // Hole die Dateiliste aus GitHub
     const response = await fetch(apiUrl);
@@ -13,7 +18,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     const futureFiles = files.filter(file => {
       if (!file.name.endsWith(".html")) return false;
       const datePart = file.name.replace(".html", "");
-      return datePart >= today; // Vergleiche YYYY-MM-DD
+      if (!/^\d{4}-\d{2}-\d{2}$/.test(datePart)) return false; // Nur echte Datumsnamen
+      return datePart >= today;
     });
 
     // Sortiere nach Datum aufsteigend
@@ -52,14 +58,15 @@ document.addEventListener("DOMContentLoaded", async () => {
         <p>Stand: ${standText}</p>
       `;
 
-      container.appendChild(card);
+      // Karte in listDiv einfügen
+      listDiv.appendChild(card);
     }
 
     if (futureFiles.length === 0) {
-      container.innerHTML = "<p>Keine aktuellen oder zukünftigen Pläne gefunden.</p>";
+      listDiv.innerHTML = "<p>Keine aktuellen oder zukünftigen Pläne gefunden.</p>";
     }
   } catch (err) {
     console.error("Fehler:", err);
-    container.innerHTML = "<p>Fehler beim Laden der Pläne.</p>";
+    listDiv.innerHTML = "<p>Fehler beim Laden der Pläne.</p>";
   }
 });
