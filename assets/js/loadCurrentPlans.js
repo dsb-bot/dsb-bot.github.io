@@ -8,6 +8,14 @@ document.addEventListener("DOMContentLoaded", async () => {
   listDiv.className = "list";
   container.appendChild(listDiv);
 
+  // Lade-Platzhalter anzeigen
+  listDiv.innerHTML = `
+    <div class="card">
+      <h2>Pläne Laden...</h2>
+      <p>Eigentlich sollte das nicht so lange dauern, dass du das hier lesen kannst!</p>
+    </div>
+  `;
+
   try {
     // Hole die Dateiliste aus GitHub
     const response = await fetch(apiUrl);
@@ -24,6 +32,9 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     // Sortiere nach Datum aufsteigend
     futureFiles.sort((a, b) => a.name.localeCompare(b.name));
+
+    // Alte Lade-Karte entfernen, bevor neue Karten eingefügt werden
+    listDiv.innerHTML = "";
 
     for (const file of futureFiles) {
       const dateStr = file.name.replace(".html", ""); // z.B. 2025-10-20
@@ -44,7 +55,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         "Donnerstag", "Freitag", "Samstag"
       ];
       const weekday = weekdayNames[dateObj.getDay()];
-      const formattedDate = `${weekday}, ${dateObj.getDate().toString().padStart(2, "0")}.${(dateObj.getMonth()+1).toString().padStart(2, "0")}.${dateObj.getFullYear()}`;
+      const formattedDate = `${weekday}, ${dateObj.getDate().toString().padStart(2, "0")}.${(dateObj.getMonth() + 1).toString().padStart(2, "0")}.${dateObj.getFullYear()}`;
 
       // Karte erzeugen
       const card = document.createElement("div");
@@ -63,10 +74,21 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
     if (futureFiles.length === 0) {
-      listDiv.innerHTML = "<p>Keine aktuellen oder zukünftigen Pläne gefunden.</p>";
+    listDiv.innerHTML = `
+    <div class="card">
+      <h2>Keine Pläne da!</h2>
+      <p>Es wurden keine aktuellen oder zukünftigen Pläne gefunden. Wenn Du glaubst, dass das ein Fehler ist, melde das bitte <a href="/kontakt.html">hier<a/>.</p>
+    </div>
+  `;
     }
-  } catch (err) {
-    console.error("Fehler:", err);
-    listDiv.innerHTML = "<p>Fehler beim Laden der Pläne.</p>";
+  } catch (error) {
+    console.error("Fehler:", error);
+    listDiv.innerHTML = `
+    <div class="card">
+      <h2>Ein Fehler ist aufgetreten.</h2>
+      <p>${error}</p>
+      <p>Bitte melde den Fehler <a href="/kontakt.html">hier<a/>.</p>
+    </div>
+  `;
   }
 });

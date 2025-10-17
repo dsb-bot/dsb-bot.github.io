@@ -1,10 +1,15 @@
 async function loadHistoricalPlans() {
   const container = document.getElementById("list-container");
-  container.innerHTML = "<p>Lade Pläne...</p>";
+  container.innerHTML = `
+    <div class="card">
+      <h2>Pläne Laden...</h2>
+      <p>Eigentlich sollte das nicht so lange dauern, dass du das hier lesen kannst!</p>
+    </div>
+  `;
 
   try {
     const response = await fetch("https://api.github.com/repos/dsb-bot/dsb-database/contents/plans");
-    if (!response.ok) throw new Error("Fehler beim Abrufen der Pläne");
+    if (!response.ok) throw new Error("Fehler beim Abrufen der API");
     const files = await response.json();
 
     const planFiles = files.filter(f => f.name.match(/^\d{4}-\d{2}-\d{2}\.html$/));
@@ -67,7 +72,13 @@ async function loadHistoricalPlans() {
       });
   } catch (error) {
     console.error(error);
-    container.innerHTML = "<p>Fehler beim Laden der Pläne.</p>";
+    container.innerHTML = `
+    <div class="card">
+      <h2>Ein Fehler ist aufgetreten.</h2>
+      <p>${error}</p>
+      <p>Bitte melde den Fehler <a href="/kontakt.html">hier<a/>.</p>
+    </div>
+  `;
   }
 }
 

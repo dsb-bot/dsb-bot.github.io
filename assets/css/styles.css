@@ -337,6 +337,10 @@ h2 {
   transition: color var(--transition-duration) ease;
 }
 
+.card a {
+  color: var(--text-color);
+}
+
 .card p {
   margin: 0.3rem 0 0 0;
   font-size: 0.9rem;
