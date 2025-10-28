@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", async () => {
   const container = document.getElementById("currentPlans-container");
-  const apiUrl = "https://api.github.com/repos/dsb-bot/dsb-database/contents/plans";
+  const apiUrl = `https://api.github.com/repos/dsb-bot/dsb-database/contents/plans?timestamp=${Date.now()}`;
   const today = new Date().toISOString().split("T")[0];
 
   // Neues <div class="list"> erzeugen
@@ -39,7 +39,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     for (const file of futureFiles) {
       const dateStr = file.name.replace(".html", ""); // z.B. 2025-10-20
       const dateObj = new Date(dateStr + "T00:00:00");
-      const downloadUrl = file.download_url;
+      const downloadUrl = file.download_url + "?timestamp=" + Date.now();
 
       // HTML laden, um den Stand auszulesen
       const htmlResponse = await fetch(downloadUrl);
