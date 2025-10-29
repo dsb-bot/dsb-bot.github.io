@@ -29,8 +29,8 @@ fetch("../assets/html/navbar.html")
   .then(data => {
     document.getElementById("navbar").innerHTML = data;
 
-    // Dropdown-Logik erst nach dem Laden der Navbar ausführen
     const dropdowns = document.querySelectorAll(".dropdown");
+    const reloadButton = document.querySelector(".reload-button");
 
     dropdowns.forEach((dropdown) => {
       const button = dropdown.querySelector(".dropdown-button");
@@ -38,13 +38,27 @@ fetch("../assets/html/navbar.html")
         dropdown.classList.toggle("active");
       });
 
-      // Optional: Schließe das Dropdown, wenn außerhalb geklickt wird
       document.addEventListener("click", (event) => {
         if (!dropdown.contains(event.target)) {
           dropdown.classList.remove("active");
         }
       });
     });
+
+    if (reloadButton) {
+      reloadButton.addEventListener("click", () => {
+        // Button sofort den Fokus verlieren lassen
+        reloadButton.blur();
+        
+        setTimeout(() => {
+          reloadButton.classList.remove("active");
+          reloadButton.closest('.dropdown').classList.remove("active");
+          dropdowns.forEach(dropdown => {
+            dropdown.classList.remove("active");
+          });
+        }, 500);
+      });
+    }
   });
 
 document.addEventListener("DOMContentLoaded", () => {

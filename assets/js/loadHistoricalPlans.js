@@ -1,5 +1,8 @@
 async function loadHistoricalPlans() {
   const container = document.getElementById("list-container");
+
+  container.innerHTML = "";
+
   container.innerHTML = `
     <div class="card">
       <h2>Pläne Laden...</h2>
@@ -9,8 +12,24 @@ async function loadHistoricalPlans() {
 
   try {
     const response = await fetch("https://api.github.com/repos/dsb-bot/dsb-database/contents/plans");
-    if (!response.ok) throw new Error("Fehler beim Abrufen der API");
+
+    if (!response.ok) {
+      let errorMessage = `${response.status} ${response.statusText}`;
+
+      try {
+        const errorData = await response.json(); // GitHub-API gibt JSON zurück
+        if (errorData && errorData.message) {
+          errorMessage += ` – ${errorData.message}`;
+        }
+      } catch {
+        // Falls die Antwort kein JSON ist, ignorieren
+      }
+
+      throw new Error(errorMessage);
+    }
+
     const files = await response.json();
+
 
     const planFiles = files.filter(f => f.name.match(/^\d{4}-\d{2}-\d{2}\.html$/));
     planFiles.sort((a, b) => new Date(b.name.replace(".html", "")) - new Date(a.name.replace(".html", "")));
@@ -76,7 +95,9 @@ async function loadHistoricalPlans() {
     <div class="card">
       <h2>Ein Fehler ist aufgetreten.</h2>
       <p>${error}</p>
-      <p>Bitte melde den Fehler <a href="/kontakt.html">hier<a/>.</p>
+      <br>
+      <p>Wenn Du öfters als 60 mal in der letzten Stunde neue Pläne geladen hast, werden leider keine weitere Anfragen erlaubt. Bitte habe etwas Geduld!</p>
+      <p>Ansonsten melde den Fehler bitte <a href="/kontakt.html">hier<a/>.</p>
     </div>
   `;
   }
@@ -98,6 +119,10 @@ function getWeekNumber(d) {
 function loadPlan(element) {
   const url = element.dataset.url;
   console.log("Lade Plan:", url);
+}
+
+async function reloadPlans() {
+  loadHistoricalPlans(); // Planhistorie neu laden
 }
 
 document.addEventListener("DOMContentLoaded", loadHistoricalPlans);

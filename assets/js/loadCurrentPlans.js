@@ -1,7 +1,11 @@
-document.addEventListener("DOMContentLoaded", async () => {
+async function loadCurrentPlans() {
   const container = document.getElementById("currentPlans-container");
   const apiUrl = `https://api.github.com/repos/dsb-bot/dsb-database/contents/plans?timestamp=${Date.now()}`;
+  // const apiUrl = `https://api.github.com/repos/dsb-bot/dsb-database/contents/plans`;
   const today = new Date().toISOString().split("T")[0];
+
+  // Container vollständig leeren, bevor neue Inhalte hinzugefügt werden
+  container.innerHTML = "";
 
   // Neues <div class="list"> erzeugen
   const listDiv = document.createElement("div");
@@ -19,14 +23,29 @@ document.addEventListener("DOMContentLoaded", async () => {
   try {
     // Hole die Dateiliste aus GitHub
     const response = await fetch(apiUrl);
-    if (!response.ok) throw new Error("Fehler beim Abrufen der API");
+
+    if (!response.ok) {
+      let errorMessage = `${response.status} ${response.statusText}`;
+
+      try {
+        const errorData = await response.json();
+        if (errorData && errorData.message) {
+          errorMessage += ` – ${errorData.message}`;
+        }
+      } catch {
+        // Falls die Antwort kein JSON ist, ignorieren
+      }
+
+      throw new Error(errorMessage);
+    }
+
     const files = await response.json();
 
     // Filtere nur gültige HTML-Dateien mit Datum >= heute
     const futureFiles = files.filter(file => {
       if (!file.name.endsWith(".html")) return false;
       const datePart = file.name.replace(".html", "");
-      if (!/^\d{4}-\d{2}-\d{2}$/.test(datePart)) return false; // Nur echte Datumsnamen
+      if (!/^\d{4}-\d{2}-\d{2}$/.test(datePart)) return false;
       return datePart >= today;
     });
 
@@ -37,7 +56,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     listDiv.innerHTML = "";
 
     for (const file of futureFiles) {
-      const dateStr = file.name.replace(".html", ""); // z.B. 2025-10-20
+      const dateStr = file.name.replace(".html", "");
       const dateObj = new Date(dateStr + "T00:00:00");
       const downloadUrl = file.download_url + "?timestamp=" + Date.now();
 
@@ -69,17 +88,17 @@ document.addEventListener("DOMContentLoaded", async () => {
         <p>Stand: ${standText}</p>
       `;
 
-      // Karte in listDiv einfügen
       listDiv.appendChild(card);
     }
 
+    // Wenn keine Pläne vorhanden sind
     if (futureFiles.length === 0) {
-    listDiv.innerHTML = `
-    <div class="card">
-      <h2>Keine Pläne da!</h2>
-      <p>Es wurden keine aktuellen oder zukünftigen Pläne gefunden. Wenn Du glaubst, dass das ein Fehler ist, melde das bitte <a href="/kontakt.html">hier<a/>.</p>
-    </div>
-  `;
+      listDiv.innerHTML = `
+        <div class="card">
+          <h2>Keine Pläne da!</h2>
+          <p>Es wurden keine aktuellen oder zukünftigen Pläne gefunden. Wenn Du glaubst, dass das ein Fehler ist, melde das bitte <a href="/kontakt.html">hier<a/>.</p>
+        </div>
+      `;
     }
   } catch (error) {
     console.error("Fehler:", error);
@@ -87,8 +106,16 @@ document.addEventListener("DOMContentLoaded", async () => {
     <div class="card">
       <h2>Ein Fehler ist aufgetreten.</h2>
       <p>${error}</p>
-      <p>Bitte melde den Fehler <a href="/kontakt.html">hier<a/>.</p>
+      <br>
+      <p>Wenn Du öfters als 60 mal in der letzten Stunde neue Pläne geladen hast, werden leider keine weitere Anfragen erlaubt. Bitte habe etwas Geduld!</p>
+      <p>Ansonsten melde den Fehler bitte <a href="/kontakt.html">hier<a/>.</p>
     </div>
-  `;
+    `;
   }
-});
+}
+
+async function reloadPlans() {
+  loadCurrentPlans(); // Aktuelle Pläne neu laden
+}
+
+document.addEventListener("DOMContentLoaded", loadCurrentPlans);

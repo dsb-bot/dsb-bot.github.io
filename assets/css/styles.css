@@ -196,10 +196,6 @@ html[data-theme="teal"] {
   transition: all var(--transition-duration) ease;
 }
 
-.dropdown-button:hover {
-  background: var(--base-hover-bg);
-}
-
 /* Dropdown Content */
 .dropdown-content {
   display: none;
@@ -228,10 +224,6 @@ html[data-theme="teal"] {
   color: var(--text-color);
   cursor: pointer;
   transition: background var(--transition-duration) ease;
-}
-
-.dropdown-content button:hover {
-  background: var(--base-hover-bg);
 }
 
 /* Show Dropdown on Hover */
@@ -473,7 +465,7 @@ button:active {
   }
 
   .dropdown-button i {
-    font-size: 1.4em;
+    font-size: 1.2em;
   }
 
   .dropdown-button {
