@@ -1,3 +1,4 @@
+// --- Bilder vorladen ---
 function preloadImages(urls) {
   urls.forEach(url => {
     const img = new Image();
@@ -17,42 +18,31 @@ preloadImages([
   "../assets/images/silver_background.jpg"
 ]);
 
-document.getElementById("navbar").innerHTML = data;
-
-const dropdowns = document.querySelectorAll(".dropdown");
-const reloadButton = document.querySelector(".reload-button");
-
-dropdowns.forEach((dropdown) => {
-  const button = dropdown.querySelector(".dropdown-button");
-  button.addEventListener("click", () => {
-    dropdown.classList.toggle("active");
-  });
-
-  document.addEventListener("click", (event) => {
-    if (!dropdown.contains(event.target)) {
-      dropdown.classList.remove("active");
-    }
-  });
-});
-
-if (reloadButton) {
-  reloadButton.addEventListener("click", () => {
-    // Button sofort den Fokus verlieren lassen
-    reloadButton.blur();
-
-    setTimeout(() => {
-      reloadButton.classList.remove("active");
-      reloadButton.closest('.dropdown').classList.remove("active");
-      dropdowns.forEach(dropdown => {
-        dropdown.classList.remove("active");
-      });
-    }, 500);
-  });
-}
-
+// --- Navbar- und Button-Logik ---
 document.addEventListener("DOMContentLoaded", () => {
   const navbar = document.querySelector(".navbar");
+  const dropdowns = document.querySelectorAll(".dropdown");
+  const reloadButton = document.querySelector(".reload-button");
 
+  // Dropdown öffnen/schließen
+  dropdowns.forEach((dropdown) => {
+    const button = dropdown.querySelector(".dropdown-button");
+    button.addEventListener("click", (event) => {
+      event.stopPropagation();
+      dropdown.classList.toggle("active");
+    });
+  });
+
+  // Schließen, wenn außerhalb geklickt wird
+  document.addEventListener("click", (event) => {
+    dropdowns.forEach((dropdown) => {
+      if (!dropdown.contains(event.target)) {
+        dropdown.classList.remove("active");
+      }
+    });
+  });
+
+  // Navbar-Scroll-Effekt
   window.addEventListener("scroll", () => {
     if (window.scrollY > 0) {
       navbar.classList.add("scrolled");
@@ -60,4 +50,6 @@ document.addEventListener("DOMContentLoaded", () => {
       navbar.classList.remove("scrolled");
     }
   });
+
+  console.log("Navbar und Dropdowns initialisiert ✅");
 });
