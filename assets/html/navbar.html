@@ -9,7 +9,10 @@
 <!-- Dropdowns -->
 <div class="navbar-dropdowns">
   <div class="dropdown" id="nav-dropdown">
-    <button class="dropdown-button">Navigation</button>
+    <button class="dropdown-button">
+      <i class="fa fa-bars"></i>
+      <span class="label">Navigation</span>
+    </button>
     <div class="dropdown-content">
       <button onclick="window.location.href='./index.html'">Start</button>
       <button onclick="window.location.href='./historie.html'">Historie</button>
@@ -18,8 +21,12 @@
       <button onclick="window.location.href='./impressum.html'">Impressum</button>
     </div>
   </div>
+
   <div class="dropdown" id="themes-dropdown">
-    <button class="dropdown-button">Themes</button>
+    <button class="dropdown-button">
+      <i class="fa fa-palette"></i>
+      <span class="label">Themes</span>
+    </button>
     <div class="dropdown-content">
       <button onclick="setTheme('space')">Space</button>
       <button onclick="setTheme('brown')">Brown</button>

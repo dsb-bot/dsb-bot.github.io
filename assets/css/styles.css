@@ -180,6 +180,9 @@ html[data-theme="teal"] {
 
 /* Dropdown Button */
 .dropdown-button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
   cursor: pointer;
   font-family: inherit;
   font-size: 0.9rem; /* Schriftgröße etwas kleiner */
@@ -460,5 +463,20 @@ button:active {
   .card {
     max-width: 100%;
     padding: 1.5rem;
+  }
+}
+
+/* Kleine Bildschirme: Nur Icon, Text ausblenden */
+@media (max-width: 600px) {
+  .dropdown-button .label {
+    display: none;
+  }
+
+  .dropdown-button i {
+    font-size: 1.4em;
+  }
+
+  .dropdown-button {
+    padding: 0.6em 0.8em;
   }
 }
