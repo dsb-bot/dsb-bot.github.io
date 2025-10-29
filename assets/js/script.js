@@ -17,49 +17,38 @@ preloadImages([
   "../assets/images/silver_background.jpg"
 ]);
 
+document.getElementById("navbar").innerHTML = data;
 
-fetch("../assets/html/footer.html")
-  .then(response => response.text())
-  .then(data => {
-    document.getElementById("footer").innerHTML = data;
+const dropdowns = document.querySelectorAll(".dropdown");
+const reloadButton = document.querySelector(".reload-button");
+
+dropdowns.forEach((dropdown) => {
+  const button = dropdown.querySelector(".dropdown-button");
+  button.addEventListener("click", () => {
+    dropdown.classList.toggle("active");
   });
 
-fetch("../assets/html/navbar.html")
-  .then(response => response.text())
-  .then(data => {
-    document.getElementById("navbar").innerHTML = data;
-
-    const dropdowns = document.querySelectorAll(".dropdown");
-    const reloadButton = document.querySelector(".reload-button");
-
-    dropdowns.forEach((dropdown) => {
-      const button = dropdown.querySelector(".dropdown-button");
-      button.addEventListener("click", () => {
-        dropdown.classList.toggle("active");
-      });
-
-      document.addEventListener("click", (event) => {
-        if (!dropdown.contains(event.target)) {
-          dropdown.classList.remove("active");
-        }
-      });
-    });
-
-    if (reloadButton) {
-      reloadButton.addEventListener("click", () => {
-        // Button sofort den Fokus verlieren lassen
-        reloadButton.blur();
-        
-        setTimeout(() => {
-          reloadButton.classList.remove("active");
-          reloadButton.closest('.dropdown').classList.remove("active");
-          dropdowns.forEach(dropdown => {
-            dropdown.classList.remove("active");
-          });
-        }, 500);
-      });
+  document.addEventListener("click", (event) => {
+    if (!dropdown.contains(event.target)) {
+      dropdown.classList.remove("active");
     }
   });
+});
+
+if (reloadButton) {
+  reloadButton.addEventListener("click", () => {
+    // Button sofort den Fokus verlieren lassen
+    reloadButton.blur();
+
+    setTimeout(() => {
+      reloadButton.classList.remove("active");
+      reloadButton.closest('.dropdown').classList.remove("active");
+      dropdowns.forEach(dropdown => {
+        dropdown.classList.remove("active");
+      });
+    }, 500);
+  });
+}
 
 document.addEventListener("DOMContentLoaded", () => {
   const navbar = document.querySelector(".navbar");

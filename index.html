@@ -23,7 +23,58 @@
 
   <div class="background"></div>
 
-  <div class="navbar" id="navbar"></div>
+  <div class="navbar" id="navbar">
+    <!-- Logo und Titel -->
+    <a href="index.html" class="navbar-logo">
+      <div class="logo-container">
+        <img src="assets/images/dsb_bot_logo.jpg" alt="DSB-Bot Logo" style="width: 32px; height: 32px;">
+        <span>DSB-Bot</span>
+      </div>
+    </a>
+
+    <!-- Dropdowns -->
+    <div class="navbar-dropdowns">
+
+      <div class="dropdown" id="nav-dropdown">
+        <button class="dropdown-button reload-button" onclick="reloadPlans()">
+          <i class="fa fa-rotate-right"></i>
+          <span class="label">Reload</span>
+        </button>
+      </div>
+
+      <div class="dropdown" id="nav-dropdown">
+        <button class="dropdown-button">
+          <i class="fa fa-bars"></i>
+          <span class="label">Navigation</span>
+        </button>
+        <div class="dropdown-content">
+          <button onclick="window.location.href='./index.html'">Start</button>
+          <button onclick="window.location.href='./historie.html'">Historie</button>
+          <button onclick="window.location.href='./kontakt.html'">Kontakt</button>
+          <button onclick="window.location.href='./datenschutz.html'">Datenschutz</button>
+          <button onclick="window.location.href='./impressum.html'">Impressum</button>
+        </div>
+      </div>
+
+      <div class="dropdown" id="themes-dropdown">
+        <button class="dropdown-button">
+          <i class="fa fa-palette"></i>
+          <span class="label">Themes</span>
+        </button>
+        <div class="dropdown-content">
+          <button onclick="setTheme('space')">Space</button>
+          <button onclick="setTheme('brown')">Brown</button>
+          <button onclick="setTheme('pink')">Pink</button>
+          <button onclick="setTheme('green')">Grün</button>
+          <button onclick="setTheme('purple')">Lila</button>
+          <button onclick="setTheme('red')">Rot</button>
+          <button onclick="setTheme('cyan')">Cyan</button>
+          <button onclick="setTheme('gold')">Golden</button>
+          <button onclick="setTheme('silver')">Silver</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <div class="container">
 
@@ -170,8 +221,14 @@
   <script src="assets/js/loadCurrentPlans.js"></script>
   <script src="assets/js/showPlan.js"></script>
 
-  <footer id="footer"></footer>
-
+  <footer id="footer">
+    <div class="footer-text">
+      DSB-Bot by DerJokko - &copy; 2025 All rights reserved.<br>
+      <a href="./impressum.html" class="footer-text">Impressum</a>
+      <a href="./datenschutz.html" class="footer-text">Datenschutz</a>
+      <br>
+    </div>
+  </footer>
 </body>
 
 </html>
