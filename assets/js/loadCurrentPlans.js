@@ -1,7 +1,7 @@
 async function loadCurrentPlans() {
   const container = document.getElementById("currentPlans-container");
-  //   const apiUrl = `https://api.github.com/repos/dsb-bot/dsb-database/contents/plans?timestamp=${Date.now()}`;
-const apiUrl = `https://api.github.com/repos/dsb-bot/dsb-database/contents/plans`;
+  const apiUrl = `https://api.github.com/repos/dsb-bot/dsb-database/contents/plans?timestamp=${Date.now()}`;
+  // const apiUrl = `https://api.github.com/repos/dsb-bot/dsb-database/contents/plans`;
   const today = new Date().toISOString().split("T")[0];
 
   // Container vollständig leeren, bevor neue Inhalte hinzugefügt werden
