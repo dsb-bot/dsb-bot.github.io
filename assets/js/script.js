@@ -33,13 +33,14 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // Schließen, wenn außerhalb geklickt wird
-  document.addEventListener("click", (event) => {
-    dropdowns.forEach((dropdown) => {
-      if (!dropdown.contains(event.target)) {
-        dropdown.classList.remove("active");
-      }
-    });
+  // Wenn man scrollt → schließen
+  window.addEventListener("scroll", () => {
+    dropdowns.forEach((dropdown) => dropdown.classList.remove("active"));
+  });
+
+  // Wenn man irgendwo anders hinklickt → schließen
+  document.addEventListener("click", () => {
+    dropdowns.forEach((dropdown) => dropdown.classList.remove("active"));
   });
 
   // Navbar-Scroll-Effekt
