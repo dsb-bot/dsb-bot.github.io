@@ -1,11 +1,20 @@
-// --- Bilder vorladen ---
-function preloadImages(urls) {
+function delay(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+async function preloadImages(urls) {
+  // 1 Sekunde warten
+  await delay(1000);
+
+  // Bilder gleichzeitig laden
   urls.forEach(url => {
     const img = new Image();
     img.src = url;
+    console.log(`Preloading: ${url}`);
   });
 }
 
+// Aufruf
 preloadImages([
   "../assets/images/space_background.jpg",
   "../assets/images/brown_background.jpg",
@@ -17,6 +26,7 @@ preloadImages([
   "../assets/images/gold_background.jpg",
   "../assets/images/silver_background.jpg"
 ]);
+
 
 // --- Navbar- und Button-Logik ---
 document.addEventListener("DOMContentLoaded", () => {
