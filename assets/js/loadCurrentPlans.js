@@ -107,7 +107,7 @@ async function loadCurrentPlans() {
       <h2>Ein Fehler ist aufgetreten.</h2>
       <p>${error}</p>
       <br>
-      <p>Wenn Du öfters als 60 mal in der letzten Stunde neue Pläne geladen hast, werden leider keine weitere Anfragen erlaubt. Bitte habe etwas Geduld!</p>
+      <p>Wenn Du öfters in der letzten Stunde neue Pläne geladen hast, werden leider keine weitere Anfragen erlaubt. Bitte habe etwas Geduld!</p>
       <p>Ansonsten melde den Fehler bitte <a href="/kontakt.html">hier<a/>.</p>
     </div>
     `;
