@@ -1,7 +1,7 @@
 async function loadCurrentPlans() {
   const container = document.getElementById("currentPlans-container");
-  const apiUrl = `https://api.github.com/repos/dsb-bot/dsb-database/contents/plans?timestamp=${Date.now()}`;
-  // const apiUrl = `https://api.github.com/repos/dsb-bot/dsb-database/contents/plans`;
+  const currentTimestamp = `?timestamp=${Date.now()}`;
+  const apiUrl = `https://api.github.com/repos/dsb-bot/dsb-database/contents/plans` + currentTimestamp;
   const today = new Date().toISOString().split("T")[0];
 
   // Container vollständig leeren, bevor neue Inhalte hinzugefügt werden
@@ -58,7 +58,7 @@ async function loadCurrentPlans() {
     for (const file of futureFiles) {
       const dateStr = file.name.replace(".html", "");
       const dateObj = new Date(dateStr + "T00:00:00");
-      const downloadUrl = file.download_url + "?timestamp=" + Date.now();
+      const downloadUrl = file.download_url + currentTimestamp;
 
       // HTML laden, um den Stand auszulesen
       const htmlResponse = await fetch(downloadUrl);

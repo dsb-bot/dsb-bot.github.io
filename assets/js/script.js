@@ -29,6 +29,14 @@ document.addEventListener("DOMContentLoaded", () => {
     const button = dropdown.querySelector(".dropdown-button");
     button.addEventListener("click", (event) => {
       event.stopPropagation();
+
+      // Alle anderen Dropdowns schließen
+      dropdowns.forEach((d) => {
+        if (d !== dropdown) {
+          d.classList.remove("active");
+        }
+      });
+
       dropdown.classList.toggle("active");
     });
   });
