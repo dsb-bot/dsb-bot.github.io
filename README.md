@@ -29,7 +29,7 @@ Besuche die Seite: [https://dsb-bot.github.io](https://dsb-bot.github.io)
 ## Installation
 1. **Projekt klonen:**
    ```bash
-   git clone https://github.com/USERNAME/DSB-Bot.git
+   git clone https://github.com/dsb-bot/dsb-bot.github.io.git
    ```
 2. **Projekt öffnen:**
    Navigiere in das Projektverzeichnis:
