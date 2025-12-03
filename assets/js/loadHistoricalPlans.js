@@ -11,7 +11,8 @@ async function loadHistoricalPlans() {
   `;
 
   try {
-    const response = await fetch("https://api.github.com/repos/dsb-bot/dsb-database/contents/plans");
+    const selectedDB = getDatabase(); // Cookie lesen
+    const response = await fetch(`https://api.github.com/repos/dsb-bot/${selectedDB}/contents/plans`);
 
     if (!response.ok) {
       let errorMessage = `${response.status} ${response.statusText}`;
