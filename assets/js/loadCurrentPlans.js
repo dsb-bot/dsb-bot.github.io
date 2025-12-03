@@ -3,7 +3,7 @@ async function loadCurrentPlans() {
   const currentTimestamp = `?timestamp=${Date.now()}`;
   const selectedDB = getDatabase();
   const apiUrl = `https://api.github.com/repos/dsb-bot/${selectedDB}/contents/plans` + currentTimestamp;
-  const todayStr = new Date().toISOString().split("T")[0]; // YYYY-MM-DD
+  const todayStr = new Date().toISOString().split("T")[0];
   const tomorrow = new Date();
   tomorrow.setDate(tomorrow.getDate() + 1);
   const tomorrowStr = tomorrow.toISOString().split("T")[0];
@@ -28,33 +28,49 @@ async function loadCurrentPlans() {
 
     const files = await response.json();
 
-    // Filter auf gültige HTML-Dateien
-    const planFiles = files.filter(file =>
+    // Filter gültige HTML-Dateien
+    let planFiles = files.filter(file =>
       file.name.endsWith(".html") && /^\d{4}-\d{2}-\d{2}\.html$/.test(file.name)
     );
 
     // Sortiere aufsteigend nach Name (Datum)
     planFiles.sort((a, b) => a.name.localeCompare(b.name));
 
-    listDiv.innerHTML = "";
-
-    for (const file of planFiles) {
+    // Filter nach Future Plans Einstellung
+    planFiles = planFiles.filter(file => {
       const dateStr = file.name.replace(".html", "");
+      if (!futurePlansEnabled && dateStr > tomorrowStr) return false; // nur heute + morgen
+      if (dateStr < todayStr) return false; // nur heute oder später
+      return true;
+    });
 
-      // Filter nach Future Plans Einstellung
-      if (!futurePlansEnabled && dateStr > tomorrowStr) continue; // nur heute und morgen
-      if (dateStr < todayStr) continue; // nur heute oder später
+    listDiv.innerHTML = "";
+    if (planFiles.length === 0) {
+      listDiv.innerHTML = `
+        <div class="card">
+          <h2>Keine Pläne da!</h2>
+          <p>Es wurden keine Pläne gefunden. Wenn Du glaubst, dass das ein Fehler ist, melde das bitte <a href="/kontakt.html">hier<a/>.</p>
+        </div>
+      `;
+      return;
+    }
 
-      const downloadUrl = file.download_url + currentTimestamp;
-      const htmlResponse = await fetch(downloadUrl);
-      const htmlText = await htmlResponse.text();
-      const match = htmlText.match(/Stand:\s*([\d.]+\s*\d{2}:\d{2})/);
-      const standText = match ? match[1] : "Unbekannt";
+    // Nur ältesten Plan laden, um Stand zu bestimmen
+    const oldestPlanUrl = planFiles[0].download_url + currentTimestamp;
+    const oldestHtmlResponse = await fetch(oldestPlanUrl);
+    const oldestHtmlText = await oldestHtmlResponse.text();
+    const match = oldestHtmlText.match(/Stand:\s*([\d.]+\s*\d{2}:\d{2})/);
+    const standText = match ? match[1] : "Unbekannt";
 
+    // Karten erzeugen (alle mit gleichem Stand)
+    for (const file of planFiles) {
+      const dateStr = file.name.replace(".html", ""); // Datum aus Dateiname
       const dateObj = new Date(dateStr + "T00:00:00");
       const weekdayNames = ["Sonntag","Montag","Dienstag","Mittwoch","Donnerstag","Freitag","Samstag"];
       const weekday = weekdayNames[dateObj.getDay()];
       const formattedDate = `${weekday}, ${dateObj.getDate().toString().padStart(2,"0")}.${(dateObj.getMonth()+1).toString().padStart(2,"0")}.${dateObj.getFullYear()}`;
+
+      const downloadUrl = file.download_url + currentTimestamp;
 
       const card = document.createElement("div");
       card.className = "card";
@@ -68,15 +84,6 @@ async function loadCurrentPlans() {
       `;
 
       listDiv.appendChild(card);
-    }
-
-    if (listDiv.children.length === 0) {
-      listDiv.innerHTML = `
-        <div class="card">
-          <h2>Keine Pläne da!</h2>
-          <p>Es wurden keine Pläne gefunden. Wenn Du glaubst, dass das ein Fehler ist, melde das bitte <a href="/kontakt.html">hier<a/>.</p>
-        </div>
-      `;
     }
 
   } catch (error) {
