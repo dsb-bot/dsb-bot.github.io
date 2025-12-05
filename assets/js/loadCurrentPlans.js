@@ -3,10 +3,6 @@ async function loadCurrentPlans() {
   const currentTimestamp = `?timestamp=${Date.now()}`;
   const selectedDB = getDatabase();
   const apiUrl = `https://api.github.com/repos/dsb-bot/${selectedDB}/contents/plans` + currentTimestamp;
-  const todayStr = new Date().toISOString().split("T")[0];
-  const tomorrow = new Date();
-  tomorrow.setDate(tomorrow.getDate() + 1);
-  const tomorrowStr = tomorrow.toISOString().split("T")[0];
   const futurePlansEnabled = getFuturePlans() === "true";
 
   container.innerHTML = "";
@@ -22,25 +18,39 @@ async function loadCurrentPlans() {
     </div>
   `;
 
+  const today = new Date();
+  const todayStr = today.toISOString().split("T")[0];
+
+  // Nächsten Wochentag berechnen
+  const nextWeekdayDate = new Date();
+  nextWeekdayDate.setDate(nextWeekdayDate.getDate() + 1);
+
+  if (nextWeekdayDate.getDay() === 6) {         // Samstag → Montag
+    nextWeekdayDate.setDate(nextWeekdayDate.getDate() + 2);
+  } else if (nextWeekdayDate.getDay() === 0) {  // Sonntag → Montag
+    nextWeekdayDate.setDate(nextWeekdayDate.getDate() + 1);
+  }
+
+  const nextWeekdayStr = nextWeekdayDate.toISOString().split("T")[0];
+
   try {
     const response = await fetch(apiUrl);
     if (!response.ok) throw new Error(`${response.status} ${response.statusText}`);
 
     const files = await response.json();
 
-    // Filter gültige HTML-Dateien
     let planFiles = files.filter(file =>
       file.name.endsWith(".html") && /^\d{4}-\d{2}-\d{2}\.html$/.test(file.name)
     );
 
-    // Sortiere aufsteigend nach Name (Datum)
     planFiles.sort((a, b) => a.name.localeCompare(b.name));
 
-    // Filter nach Future Plans Einstellung
     planFiles = planFiles.filter(file => {
       const dateStr = file.name.replace(".html", "");
-      if (!futurePlansEnabled && dateStr > tomorrowStr) return false; // nur heute + morgen
-      if (dateStr < todayStr) return false; // nur heute oder später
+
+      if (!futurePlansEnabled && dateStr > nextWeekdayStr) return false;
+      if (dateStr < todayStr) return false;
+
       return true;
     });
 
@@ -55,20 +65,18 @@ async function loadCurrentPlans() {
       return;
     }
 
-    // Nur ältesten Plan laden, um Stand zu bestimmen
     const oldestPlanUrl = planFiles[0].download_url + currentTimestamp;
     const oldestHtmlResponse = await fetch(oldestPlanUrl);
     const oldestHtmlText = await oldestHtmlResponse.text();
     const match = oldestHtmlText.match(/Stand:\s*([\d.]+\s*\d{2}:\d{2})/);
     const standText = match ? match[1] : "Unbekannt";
 
-    // Karten erzeugen (alle mit gleichem Stand)
     for (const file of planFiles) {
-      const dateStr = file.name.replace(".html", ""); // Datum aus Dateiname
+      const dateStr = file.name.replace(".html", "");
       const dateObj = new Date(dateStr + "T00:00:00");
-      const weekdayNames = ["Sonntag","Montag","Dienstag","Mittwoch","Donnerstag","Freitag","Samstag"];
+      const weekdayNames = ["Sonntag", "Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag"];
       const weekday = weekdayNames[dateObj.getDay()];
-      const formattedDate = `${weekday}, ${dateObj.getDate().toString().padStart(2,"0")}.${(dateObj.getMonth()+1).toString().padStart(2,"0")}.${dateObj.getFullYear()}`;
+      const formattedDate = `${weekday}, ${dateObj.getDate().toString().padStart(2, "0")}.${(dateObj.getMonth() + 1).toString().padStart(2, "0")}.${dateObj.getFullYear()}`;
 
       const downloadUrl = file.download_url + currentTimestamp;
 
