@@ -1,18 +1,16 @@
 async function loadCurrentPlans() {
   const container = document.getElementById("currentPlans-container");
   const currentTimestamp = `?timestamp=${Date.now()}`;
-  const apiUrl = `https://api.github.com/repos/dsb-bot/dsb-database/contents/plans` + currentTimestamp;
-  const today = new Date().toISOString().split("T")[0];
+  const selectedDB = getDatabase();
+  const apiUrl = `https://api.github.com/repos/dsb-bot/${selectedDB}/contents/plans` + currentTimestamp;
+  const futurePlansEnabled = getFuturePlans() === "true";
 
-  // Container vollständig leeren, bevor neue Inhalte hinzugefügt werden
   container.innerHTML = "";
 
-  // Neues <div class="list"> erzeugen
   const listDiv = document.createElement("div");
   listDiv.className = "list";
   container.appendChild(listDiv);
 
-  // Lade-Platzhalter anzeigen
   listDiv.innerHTML = `
     <div class="card">
       <h2>Pläne Laden...</h2>
@@ -20,63 +18,68 @@ async function loadCurrentPlans() {
     </div>
   `;
 
+  const today = new Date();
+  const todayStr = today.toISOString().split("T")[0];
+
+  // Nächsten Wochentag berechnen
+  const nextWeekdayDate = new Date();
+  nextWeekdayDate.setDate(nextWeekdayDate.getDate() + 1);
+
+  if (nextWeekdayDate.getDay() === 6) {         // Samstag → Montag
+    nextWeekdayDate.setDate(nextWeekdayDate.getDate() + 2);
+  } else if (nextWeekdayDate.getDay() === 0) {  // Sonntag → Montag
+    nextWeekdayDate.setDate(nextWeekdayDate.getDate() + 1);
+  }
+
+  const nextWeekdayStr = nextWeekdayDate.toISOString().split("T")[0];
+
   try {
-    // Hole die Dateiliste aus GitHub
     const response = await fetch(apiUrl);
-
-    if (!response.ok) {
-      let errorMessage = `${response.status} ${response.statusText}`;
-
-      try {
-        const errorData = await response.json();
-        if (errorData && errorData.message) {
-          errorMessage += ` – ${errorData.message}`;
-        }
-      } catch {
-        // Falls die Antwort kein JSON ist, ignorieren
-      }
-
-      throw new Error(errorMessage);
-    }
+    if (!response.ok) throw new Error(`${response.status} ${response.statusText}`);
 
     const files = await response.json();
 
-    // Filtere nur gültige HTML-Dateien mit Datum >= heute
-    const futureFiles = files.filter(file => {
-      if (!file.name.endsWith(".html")) return false;
-      const datePart = file.name.replace(".html", "");
-      if (!/^\d{4}-\d{2}-\d{2}$/.test(datePart)) return false;
-      return datePart >= today;
+    let planFiles = files.filter(file =>
+      file.name.endsWith(".html") && /^\d{4}-\d{2}-\d{2}\.html$/.test(file.name)
+    );
+
+    planFiles.sort((a, b) => a.name.localeCompare(b.name));
+
+    planFiles = planFiles.filter(file => {
+      const dateStr = file.name.replace(".html", "");
+
+      if (!futurePlansEnabled && dateStr > nextWeekdayStr) return false;
+      if (dateStr < todayStr) return false;
+
+      return true;
     });
 
-    // Sortiere nach Datum aufsteigend
-    futureFiles.sort((a, b) => a.name.localeCompare(b.name));
-
-    // Alte Lade-Karte entfernen, bevor neue Karten eingefügt werden
     listDiv.innerHTML = "";
+    if (planFiles.length === 0) {
+      listDiv.innerHTML = `
+        <div class="card">
+          <h2>Keine Pläne da!</h2>
+          <p>Es wurden keine Pläne gefunden. Wenn Du glaubst, dass das ein Fehler ist, melde das bitte <a href="/kontakt.html">hier<a/>.</p>
+        </div>
+      `;
+      return;
+    }
 
-    for (const file of futureFiles) {
+    const oldestPlanUrl = planFiles[0].download_url + currentTimestamp;
+    const oldestHtmlResponse = await fetch(oldestPlanUrl);
+    const oldestHtmlText = await oldestHtmlResponse.text();
+    const match = oldestHtmlText.match(/Stand:\s*([\d.]+\s*\d{2}:\d{2})/);
+    const standText = match ? match[1] : "Unbekannt";
+
+    for (const file of planFiles) {
       const dateStr = file.name.replace(".html", "");
       const dateObj = new Date(dateStr + "T00:00:00");
-      const downloadUrl = file.download_url + currentTimestamp;
-
-      // HTML laden, um den Stand auszulesen
-      const htmlResponse = await fetch(downloadUrl);
-      const htmlText = await htmlResponse.text();
-
-      // „Stand:“ mit Regex extrahieren
-      const match = htmlText.match(/Stand:\s*([\d.]+\s*\d{2}:\d{2})/);
-      const standText = match ? match[1] : "Unbekannt";
-
-      // Wochentag + formatiertes Datum
-      const weekdayNames = [
-        "Sonntag", "Montag", "Dienstag", "Mittwoch",
-        "Donnerstag", "Freitag", "Samstag"
-      ];
+      const weekdayNames = ["Sonntag", "Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag"];
       const weekday = weekdayNames[dateObj.getDay()];
       const formattedDate = `${weekday}, ${dateObj.getDate().toString().padStart(2, "0")}.${(dateObj.getMonth() + 1).toString().padStart(2, "0")}.${dateObj.getFullYear()}`;
 
-      // Karte erzeugen
+      const downloadUrl = file.download_url + currentTimestamp;
+
       const card = document.createElement("div");
       card.className = "card";
       card.dataset.url = downloadUrl;
@@ -91,31 +94,22 @@ async function loadCurrentPlans() {
       listDiv.appendChild(card);
     }
 
-    // Wenn keine Pläne vorhanden sind
-    if (futureFiles.length === 0) {
-      listDiv.innerHTML = `
-        <div class="card">
-          <h2>Keine Pläne da!</h2>
-          <p>Es wurden keine aktuellen oder zukünftigen Pläne gefunden. Wenn Du glaubst, dass das ein Fehler ist, melde das bitte <a href="/kontakt.html">hier<a/>.</p>
-        </div>
-      `;
-    }
   } catch (error) {
     console.error("Fehler:", error);
     listDiv.innerHTML = `
-    <div class="card">
-      <h2>Ein Fehler ist aufgetreten.</h2>
-      <p>${error}</p>
-      <br>
-      <p>Wenn Du öfters in der letzten Stunde neue Pläne geladen hast, werden leider keine weitere Anfragen erlaubt. Bitte habe etwas Geduld!</p>
-      <p>Ansonsten melde den Fehler bitte <a href="/kontakt.html">hier<a/>.</p>
-    </div>
+      <div class="card">
+        <h2>Ein Fehler ist aufgetreten.</h2>
+        <p>${error}</p>
+        <br>
+        <p>Wenn Du öfters in der letzten Stunde neue Pläne geladen hast, werden leider keine weitere Anfragen erlaubt. Bitte habe etwas Geduld!</p>
+        <p>Ansonsten melde den Fehler bitte <a href="/kontakt.html">hier<a/>.</p>
+      </div>
     `;
   }
 }
 
 async function reloadPlans() {
-  loadCurrentPlans(); // Aktuelle Pläne neu laden
+  loadCurrentPlans();
 }
 
 document.addEventListener("DOMContentLoaded", loadCurrentPlans);

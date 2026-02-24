@@ -340,6 +340,16 @@ h2 {
   transition: color var(--transition-duration) ease;
 }
 
+.card h3 {
+  margin: 0;
+  font-size: 0.9rem;
+  text-align: center;
+  color: var(--text-color);
+  text-shadow: none;
+
+  transition: color var(--transition-duration) ease;
+}
+
 .card a {
   color: var(--text-color);
 }
@@ -385,6 +395,16 @@ h2 {
   text-align: center;
   color: var(--text-color);
   letter-spacing: 1px;
+  text-shadow: none;
+
+  transition: color var(--transition-duration) ease;
+}
+
+.text-card h3 {
+  margin: 0;
+  font-size: 0.9rem;
+  text-align: center;
+  color: var(--text-color);
   text-shadow: none;
 
   transition: color var(--transition-duration) ease;

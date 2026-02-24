@@ -1,8 +1,6 @@
 async function loadHistoricalPlans() {
   const container = document.getElementById("list-container");
 
-  container.innerHTML = "";
-
   container.innerHTML = `
     <div class="card">
       <h2>Pläne Laden...</h2>
@@ -11,27 +9,32 @@ async function loadHistoricalPlans() {
   `;
 
   try {
-    const response = await fetch("https://api.github.com/repos/dsb-bot/dsb-database/contents/plans");
+    const selectedDB = getDatabase(); // Cookie lesen
+    const response = await fetch(`https://api.github.com/repos/dsb-bot/${selectedDB}/contents/plans`);
 
     if (!response.ok) {
       let errorMessage = `${response.status} ${response.statusText}`;
-
       try {
-        const errorData = await response.json(); // GitHub-API gibt JSON zurück
-        if (errorData && errorData.message) {
-          errorMessage += ` – ${errorData.message}`;
-        }
-      } catch {
-        // Falls die Antwort kein JSON ist, ignorieren
-      }
-
+        const errorData = await response.json();
+        if (errorData && errorData.message) errorMessage += ` – ${errorData.message}`;
+      } catch {}
       throw new Error(errorMessage);
     }
 
     const files = await response.json();
 
+    // Gestern bestimmen
+    const today = new Date();
+    const yesterday = new Date(today);
+    yesterday.setDate(today.getDate() - 1);
+    const yesterdayStr = yesterday.toISOString().split("T")[0]; // YYYY-MM-DD
 
-    const planFiles = files.filter(f => f.name.match(/^\d{4}-\d{2}-\d{2}\.html$/));
+    // Filter: nur HTML-Dateien mit Datum bis gestern
+    const planFiles = files
+      .filter(f => f.name.match(/^\d{4}-\d{2}-\d{2}\.html$/))
+      .filter(f => f.name.replace(".html", "") <= yesterdayStr);
+
+    // Sortiere absteigend (neueste zuerst)
     planFiles.sort((a, b) => new Date(b.name.replace(".html", "")) - new Date(a.name.replace(".html", "")));
 
     // Gruppieren nach Jahr und Kalenderwoche, damit Wochen über Jahreswechsel getrennt bleiben
@@ -75,12 +78,12 @@ async function loadHistoricalPlans() {
           const downloadUrl = file.download_url;
 
           const card = document.createElement("div");
-          card.className = "card hidden"; // wird später eingeblendet
+          card.className = "card hidden";
           card.dataset.url = downloadUrl;
           card.onclick = () => loadPlan(card);
           card.style.cursor = "pointer";
           card.innerHTML = `
-            <h2>${capitalizeFirstLetter(weekday)}, ${rest}</h2>
+            <h2>${formattedDate}</h2>
             <p>Datei: ${file.name}</p>
           `;
 
@@ -90,7 +93,7 @@ async function loadHistoricalPlans() {
           setTimeout(() => {
             card.classList.remove("hidden");
             card.classList.add("fade-in");
-          }, cardIndex * 100); // alle 100 ms die nächste Karte
+          }, cardIndex * 100);
           cardIndex++;
         });
 
@@ -101,14 +104,14 @@ async function loadHistoricalPlans() {
   } catch (error) {
     console.error(error);
     container.innerHTML = `
-    <div class="card">
-      <h2>Ein Fehler ist aufgetreten.</h2>
-      <p>${error}</p>
-      <br>
-      <p>Wenn Du öfters als 60 mal in der letzten Stunde neue Pläne geladen hast, werden leider keine weitere Anfragen erlaubt. Bitte habe etwas Geduld!</p>
-      <p>Ansonsten melde den Fehler bitte <a href="/kontakt.html">hier<a/>.</p>
-    </div>
-  `;
+      <div class="card">
+        <h2>Ein Fehler ist aufgetreten.</h2>
+        <p>${error}</p>
+        <br>
+        <p>Wenn Du öfters als 60 mal in der letzten Stunde neue Pläne geladen hast, werden leider keine weitere Anfragen erlaubt. Bitte habe etwas Geduld!</p>
+        <p>Ansonsten melde den Fehler bitte <a href="/kontakt.html">hier<a/>.</p>
+      </div>
+    `;
   }
 }
 
@@ -131,7 +134,7 @@ function loadPlan(element) {
 }
 
 async function reloadPlans() {
-  loadHistoricalPlans(); // Planhistorie neu laden
+  loadHistoricalPlans();
 }
 
 document.addEventListener("DOMContentLoaded", loadHistoricalPlans);
