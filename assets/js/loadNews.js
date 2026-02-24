@@ -12,9 +12,9 @@ fetch('assets/json/news.json')
 
     // Nur anzeigen, wenn aktiv
     if (data.active) {
-      document.getElementById("popup-title").innerText = data.title;
-      document.getElementById("popup-message").innerText = data.message;
-      document.getElementById("popup-date").innerText = "Stand: " + data.lastUpdated;
+      document.getElementById("popup-title").innerHTML = data.title;
+      document.getElementById("popup-message").innerHTML = data.message;
+      document.getElementById("popup-date").innerHTML = "Stand: " + data.lastUpdated;
       document.getElementById("popup").style.display = "flex";
     }
 

@@ -1,6 +1,6 @@
 {
   "active": true,
   "title": "Testnachricht!",
-  "message": "Schön, dass du da bist 🎉 Das hier ist aber nur ein Test.",
+  "message": "Schön, dass du da bist 🎉 Das hier ist  nur eine Testnachricht. Die <i>testet</i> halt was...",
   "lastUpdated": "24.02.2026"
 }
