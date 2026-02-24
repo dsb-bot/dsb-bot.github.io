@@ -475,6 +475,29 @@ button:active {
   }
 }
 
+.popup {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  background-color: var(--base-bg-color);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  position: relative; /* in normal flow so it pushes content down */
+  width: calc(100% - 4rem);
+  margin: 0 auto;
+  margin-top: 1rem;
+  z-index: 1;
+  border-radius: 12px; /* rounded like cards */
+  overflow: hidden; /* clip inner content to the rounded border */
+}
+
+.popup-content {
+  padding: 20px;
+  border-radius: 10px;
+  max-width: 400px;
+  text-align: center;
+}
+
 /* Kleine Bildschirme: Nur Icon, Text ausblenden */
 @media (max-width: 600px) {
   .dropdown-button .label {

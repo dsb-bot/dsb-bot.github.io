@@ -23,6 +23,19 @@
 
   <div class="background"></div>
 
+  <div id="popup" class="popup">
+    <div class="popup-content">
+      <h2 id="popup-title"></h2>
+      <p id="popup-message"></p>
+      <small id="popup-date"></small>
+
+      <br><br>
+
+      <button onclick="closePopup()">Schließen</button>
+      <button onclick="forgetPopup()">Nicht mehr anzeigen</button>
+    </div>
+  </div>
+
   <div class="navbar" id="navbar">
     <!-- Logo und Titel -->
     <a href="index.html" class="navbar-logo">
@@ -238,6 +251,7 @@
   <script src="assets/js/loadCurrentPlans.js"></script>
   <script src="assets/js/preferences.js"></script>
   <script src="assets/js/showPlan.js"></script>
+  <script src="assets/js/loadNews.js"></script>
 
   <footer id="footer">
     <div class="footer-text">
