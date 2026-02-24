@@ -68,7 +68,7 @@ Die Website hat  mehrere Themes, die über das Dropdown-Menü in der Navbar ausg
 ## To-Do
 - **Needed Patches:**
   - [x] Reihenfolge der Historie fixen...
-  - [ ] Neuster Plan nach morgen wird nicht geupdatet
+  - [x] Neuster Plan nach morgen wird nicht geupdatet
 - **Upcomming Features:**
   - [x] Lehrer Pläne für Alle Schüler
   - [ ] Benutzerdefinierte Themes.
