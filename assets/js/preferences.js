@@ -41,7 +41,7 @@ function toggleFuturePlans(value) {
 function getFuturePlans() {
   const cookies = document.cookie.split(";").map(c => c.trim());
   const match = cookies.find(c => c.startsWith(COOKIE_FUTURE_PLANS + "="));
-  return match ? match.split("=")[1] : "false"; // Standard: Aus
+  return match ? match.split("=")[1] : "true"; // Standard: Ein
 }
 
 function updateFuturePlansDisplay() {
@@ -58,3 +58,17 @@ document.addEventListener("DOMContentLoaded", () => {
   updateCurrentDatabaseDisplay();
   updateFuturePlansDisplay();
 });
+
+// Setzt alle Einstellungen auf die Standardwerte zurück
+function resetPreferences() {
+  // Standarddatenbank
+  setDatabase("dsb-database");
+  // Standard: Keine zukünftigen Pläne anzeigen
+  toggleFuturePlans("true");
+}
+
+// Setzt alle Themes auf die Standardwerte zurück
+function resetTheme() {
+  localStorage.removeItem("theme");
+  window.location.reload();
+}

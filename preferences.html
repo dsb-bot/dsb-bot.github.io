@@ -76,7 +76,28 @@
 
     <div class="list">
       <div class="text-card">
-        <h2>Zukünftige Pläne</h2>
+        <h2>Allgemein</h2>
+        <br>
+        <h3>Alle Einstellungen zurücksetzen</h3>
+        <p>Setzt alle Einstellungen auf die Standardwerte zurück (ausgeschlossen Themes).</p>
+        <div
+          style="display: flex; flex-direction: column; align-items: stretch; width: 125px; margin: 0 auto; gap: 10px;">
+          <br>
+          <button onclick="resetPreferences()">Einstellungen Zurücksetzen</button>
+        </div>
+          <br>
+        <h3>Themes zurücksetzen</h3>
+        <p>Setzt alle Themes auf die Standardwerte zurück.</p>
+        <div
+          style="display: flex; flex-direction: column; align-items: stretch; width: 125px; margin: 0 auto; gap: 10px;">
+          <br>
+          <button onclick="resetTheme()">Themes Zurücksetzen</button>
+        </div>
+      </div>
+
+    <div class="list">
+      <div class="text-card">
+        <h2>Pläne nach Morgen</h2>
         <br>
         <h3>Aktuelle Einstellung</h3>
         <div style="text-align: center;">
@@ -109,7 +130,7 @@
           <br>
           <button onclick="setDatabase('dsb-database')">dsb-database</button>
           <button onclick="setDatabase('dsb-beta-database')">dsb-beta-database</button>
-          <button onclick="setDatabase('dsb-database-cloudflare')">dsb-database-cloudflare</button>
+          <!-- <button onclick="setDatabase('dsb-database-cloudflare')">dsb-database-cloudflare</button> -->
         </div>
       </div>
     </div>
