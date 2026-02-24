@@ -66,9 +66,13 @@ Die Website hat  mehrere Themes, die über das Dropdown-Menü in der Navbar ausg
 ---
 
 ## To-Do
-- [ ] **Upcomming Features:**
-  - Benutzerdefinierte Themes.
-  - Passwortschutz für alle Vertretungspläne.
+- **Needed Patches:**
+  - [ ] Reihenfolge der Historie fixen...
+  - [ ] Neuster Plan nach morgen wird nicht geupdatet
+- **Upcomming Features:**
+  - [x] Lehrer Pläne für Alle Schüler
+  - [ ] Benutzerdefinierte Themes.
+  - [ ] Passwortschutz für alle Vertretungspläne.
 
 ---
 
