@@ -23,15 +23,20 @@
 
   <div class="background"></div>
 
-  <div id="popup" class="popup">
-    <div class="popup-content"
-      style="display: flex; flex-direction: column; align-items: stretch; margin: 0 auto; gap: 5px;">
-      <h2 id="popup-title"></h2>
-      <p id="popup-message"></p>
+  <!-- Message Popup -->
+  <div id="message-popup" style="display:none;">
+    <div class="popup">
+      <div class="popup-content">
+        <h2 id="popup-title"></h2>
+        <p id="popup-message"></p>
 
-      <button onclick="closePopup()">Schließen</button>
-      <button onclick="forgetPopup()">Nicht mehr anzeigen</button>
-      <small id="popup-date"></small>
+        <div style="display:flex; justify-content:flex-end; gap:10px; margin-top:10px;">
+          <button onclick="closeMessagePopup()">Schließen</button>
+          <button onclick="forgetMessagePopup()">Nicht mehr anzeigen</button>
+        </div>
+
+        <small id="popup-date"></small>
+      </div>
     </div>
   </div>
 
@@ -148,7 +153,8 @@
         <h2>Changelog</h2>
         <p>Update 24.02.2026</p>
         <ul>
-          <li>Die Startseite zeigt jetzt wichtige Ankündigungen und News ganz oben als Mitteilung an, damit du immer auf dem Laufenden
+          <li>Die Startseite zeigt jetzt wichtige Ankündigungen und News ganz oben als Mitteilung an, damit du immer auf
+            dem Laufenden
             bist.
           </li>
           <li>Die Startseite ist nun noch kompakter.</li>

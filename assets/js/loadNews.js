@@ -1,52 +1,56 @@
-
+// --- News Popup aus JSON laden ---
 fetch('assets/json/news.json')
   .then(response => response.json())
   .then(data => {
-
     const cookieName = "popupSeen_" + data.lastUpdated;
 
-    // Wenn Cookie existiert abbrechen
-    if (getCookie(cookieName)) {
-      return;
-    }
+    // Wenn Cookie existiert, abbrechen
+    if (getCookie(cookieName)) return;
 
     // Nur anzeigen, wenn aktiv
     if (data.active) {
-      document.getElementById("popup-title").innerHTML = data.title;
-      document.getElementById("popup-message").innerHTML = data.message;
-      document.getElementById("popup-date").innerHTML = "Stand: " + data.lastUpdated;
-      document.getElementById("popup").style.display = "flex";
+      showMessagePopup(data.title, data.message, "Stand: " + data.lastUpdated);
+
+      // "Nicht mehr anzeigen" Funktion
+      window.forgetMessagePopup = function () {
+        setCookie(cookieName, "true", 30);
+        closeMessagePopup();
+      };
     }
+  })
+  .catch(err => console.error("News konnte nicht geladen werden:", err));
 
-    // "Nicht mehr anzeigen"
-    window.forgetPopup = function() {
-      setCookie(cookieName, "true", 30);
-      closePopup();
-    };
+// --- Funktionen zum Öffnen/Schließen ---
+function showMessagePopup(title, message, date = "") {
+  const popup = document.getElementById("message-popup");
+  if (!popup) return;
 
-  });
+  document.getElementById("popup-title").textContent = title;
+  document.getElementById("popup-message").innerHTML = message; // HTML erlaubt
+  document.getElementById("popup-date").textContent = date;
 
-function closePopup() {
-  document.getElementById("popup").style.display = "none";
+  popup.style.display = "flex"; // Overlay wird sichtbar
 }
 
+function closeMessagePopup() {
+  const popup = document.getElementById("message-popup");
+  if (popup) popup.style.display = "none";
+}
+
+// --- Cookie-Funktionen ---
 function setCookie(name, value, days) {
   let expires = "";
   if (days) {
     const date = new Date();
-    date.setTime(date.getTime() + (days*24*60*60*1000));
+    date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
     expires = "; expires=" + date.toUTCString();
   }
   document.cookie = name + "=" + value + expires + "; path=/; SameSite=Lax";
 }
 
 function getCookie(name) {
-  const cookies = document.cookie.split('; ');
-  for (let i = 0; i < cookies.length; i++) {
-    const parts = cookies[i].split('=');
-    if (parts[0] === name) {
-      return parts[1];
-    }
-  }
-  return null;
+  return document.cookie.split('; ').reduce((r, c) => {
+    const t = c.split('=');
+    return t[0] === name ? t[1] : r;
+  }, null);
 }
