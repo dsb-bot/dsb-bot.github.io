@@ -78,14 +78,22 @@
       <div class="text-card">
         <h2>Allgemein</h2>
         <br>
-        <h3>Alle Einstellungen zurücksetzen</h3>
+        <h3>Cookies löschen</h3>
+        <p>Löscht alle Cookies des DSB-Bot.</p>
+        <div
+          style="display: flex; flex-direction: column; align-items: stretch; width: 125px; margin: 0 auto; gap: 10px;">
+          <br>
+          <button onclick="deleteCookies()">Cookies Löschen</button>
+        </div>
+        <br>
+        <h3>Einstellungen zurücksetzen</h3>
         <p>Setzt alle Einstellungen auf die Standardwerte zurück (ausgeschlossen Themes).</p>
         <div
           style="display: flex; flex-direction: column; align-items: stretch; width: 125px; margin: 0 auto; gap: 10px;">
           <br>
           <button onclick="resetPreferences()">Einstellungen Zurücksetzen</button>
         </div>
-          <br>
+        <br>
         <h3>Themes zurücksetzen</h3>
         <p>Setzt alle Themes auf die Standardwerte zurück.</p>
         <div
@@ -95,59 +103,59 @@
         </div>
       </div>
 
-    <div class="list">
-      <div class="text-card">
-        <h2>Pläne nach Morgen</h2>
-        <br>
-        <h3>Aktuelle Einstellung</h3>
-        <div style="text-align: center;">
-          <p id="current-futurePlans">Lade...</p>
-        </div>
-        <br>
-        <h3>Ein- & Ausschalten Zukünftiger Pläne</h3>
-        <p>Hier kannst du die Anzeige von Vertretungsplänen ein-/ausschalten, die weiter als der nächste Tag in der
-          Zukunft liegen. Beachte, dass vermehrt Fehler bei diesen Planen auftreten können.</p>
-        <div
-          style="display: flex; flex-direction: column; align-items: stretch; width: 125px; margin: 0 auto; gap: 10px;">
+      <div class="list">
+        <div class="text-card">
+          <h2>Pläne nach Morgen</h2>
           <br>
-          <button onclick="toggleFuturePlans('true')">Ein</button>
-          <button onclick="toggleFuturePlans('false')">Aus</button>
+          <h3>Aktuelle Einstellung</h3>
+          <div style="text-align: center;">
+            <p id="current-futurePlans">Lade...</p>
+          </div>
+          <br>
+          <h3>Ein- & Ausschalten Zukünftiger Pläne</h3>
+          <p>Hier kannst du die Anzeige von Vertretungsplänen ein-/ausschalten, die weiter als der nächste Tag in der
+            Zukunft liegen. Beachte, dass vermehrt Fehler bei diesen Planen auftreten können.</p>
+          <div
+            style="display: flex; flex-direction: column; align-items: stretch; width: 125px; margin: 0 auto; gap: 10px;">
+            <br>
+            <button onclick="toggleFuturePlans('true')">Ein</button>
+            <button onclick="toggleFuturePlans('false')">Aus</button>
+          </div>
         </div>
-      </div>
 
-      <div class="text-card">
-        <h2>Datenbankauswahl</h2>
-        <br>
-        <h3>Aktuelle Datenbank</h3>
-        <div style="text-align: center;">
-          <p id="current-db">Lade...</p>
-        </div>
-        <br>
-        <h3>Wechsle zwischen verschiedenen Datenbanken</h3>
-        <p>Hier kannst du zwischen allen verfügbaren Datenbanken für DSB-Bot wechseln:</p>
-        <div
-          style="display: flex; flex-direction: column; align-items: stretch; width: 250px; margin: 0 auto; gap: 10px;">
+        <div class="text-card">
+          <h2>Datenbankauswahl</h2>
           <br>
-          <button onclick="setDatabase('dsb-database')">dsb-database</button>
-          <button onclick="setDatabase('dsb-beta-database')">dsb-beta-database</button>
-          <!-- <button onclick="setDatabase('dsb-database-cloudflare')">dsb-database-cloudflare</button> -->
+          <h3>Aktuelle Datenbank</h3>
+          <div style="text-align: center;">
+            <p id="current-db">Lade...</p>
+          </div>
+          <br>
+          <h3>Wechsle zwischen verschiedenen Datenbanken</h3>
+          <p>Hier kannst du zwischen allen verfügbaren Datenbanken für DSB-Bot wechseln:</p>
+          <div
+            style="display: flex; flex-direction: column; align-items: stretch; width: 250px; margin: 0 auto; gap: 10px;">
+            <br>
+            <button onclick="setDatabase('dsb-database')">dsb-database</button>
+            <button onclick="setDatabase('dsb-beta-database')">dsb-beta-database</button>
+            <!-- <button onclick="setDatabase('dsb-database-cloudflare')">dsb-database-cloudflare</button> -->
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <script src="assets/js/script.js"></script>
-  <script src="assets/js/theme.js"></script>
-  <script src="assets/js/preferences.js"></script>
+    <script src="assets/js/script.js"></script>
+    <script src="assets/js/theme.js"></script>
+    <script src="assets/js/preferences.js"></script>
 
-  <footer id="footer">
-    <div class="footer-text">
-      DSB-Bot by DerJokko - &copy; 2026 All rights reserved.<br>
-      <a href="./impressum.html" class="footer-text">Impressum</a>
-      <a href="./datenschutz.html" class="footer-text">Datenschutz</a>
-      <br>
-    </div>
-  </footer>
+    <footer id="footer">
+      <div class="footer-text">
+        DSB-Bot by DerJokko - &copy; 2026 All rights reserved.<br>
+        <a href="./impressum.html" class="footer-text">Impressum</a>
+        <a href="./datenschutz.html" class="footer-text">Datenschutz</a>
+        <br>
+      </div>
+    </footer>
 </body>
 
 </html>

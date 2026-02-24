@@ -72,3 +72,13 @@ function resetTheme() {
   localStorage.removeItem("theme");
   window.location.reload();
 }
+
+function deleteCookies() {
+  const cookies = document.cookie.split(";").map(c => c.trim());
+  for (const cookie of cookies) {
+    const name = cookie.split("=")[0];
+    document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+  }
+  updateCurrentDatabaseDisplay();
+  updateFuturePlansDisplay();
+}
