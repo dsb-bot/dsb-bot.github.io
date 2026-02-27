@@ -80,7 +80,8 @@
         <br>
 
         <h3>Einstellungen zurücksetzen</h3>
-        <p>Setzt alle Einstellungen auf die Standardwerte zurück (ausgeschlossen Themes).</p>
+        <p>Setzt alle Einstellungen auf die Standardwerte zurück (ausgeschlossen Themes). Behält als gelesen makierte
+          Nachrichten bei.</p>
         <div
           style="display: flex; flex-direction: column; align-items: stretch; width: 125px; margin: 0 auto; gap: 10px;">
           <br>
@@ -88,21 +89,21 @@
         </div>
         <br>
 
-        <h3>Cookies löschen</h3>
-        <p>Löscht alle Cookies des DSB-Bot.</p>
-        <div
-          style="display: flex; flex-direction: column; align-items: stretch; width: 125px; margin: 0 auto; gap: 10px;">
-          <br>
-          <button onclick="deleteCookies()">Cookies Löschen</button>
-        </div>
-        <br>
-
         <h3>Themes zurücksetzen</h3>
-        <p>Setzt alle Themes auf die Standardwerte zurück.</p>
+        <p>Setzt alle Themes auf die Standardwerte zurück. Aktion ist nicht reversibel.</p>
         <div
           style="display: flex; flex-direction: column; align-items: stretch; width: 125px; margin: 0 auto; gap: 10px;">
           <br>
           <button onclick="resetTheme()">Themes Zurücksetzen</button>
+        </div>
+        <br>
+
+        <h3>Cookies löschen</h3>
+        <p>Löscht alle Cookies des DSB-Bot. Aktion ist nicht reversibel.</p>
+        <div
+          style="display: flex; flex-direction: column; align-items: stretch; width: 125px; margin: 0 auto; gap: 10px;">
+          <br>
+          <button onclick="deleteCookies()">Cookies Löschen</button>
         </div>
       </div>
 
