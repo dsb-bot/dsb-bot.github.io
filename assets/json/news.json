@@ -1,6 +1,6 @@
 {
   "active": true,
-  "title": "Testnachricht!",
-  "message": "Schön, dass du da bist 🎉 Das hier ist  nur eine Testnachricht. Die <i>testet</i> halt was... Ach so, und die Pläne nach morgen funktionieren jetzt wieder (hoffentlich 😬)!",
-  "lastUpdated": "24.02.2026"
+  "title": "⚠️ WICHTIGE INFO ⚠️",
+  "message": "Pläne nach morgen sind nun offiziell verfügbar. WICHTIG: die datenbank 'dsb-beta-database' wird nicht mehr aktualisiert, da die neuen Funktionen nun offiziell verfügbar sind. Bitte wechsle zur 'dsb-database' um alle Pläne zu sehen, oder setzte alle <a href='./preferences.html'>Einstellungen</a> zurück.",
+  "lastUpdated": "27.02.2026"
 }
