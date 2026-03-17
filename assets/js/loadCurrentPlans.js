@@ -59,7 +59,8 @@ async function loadCurrentPlans() {
       listDiv.innerHTML = `
         <div class="card">
           <h2>Keine Pläne da!</h2>
-          <p>Es wurden keine Pläne gefunden. Wenn Du glaubst, dass das ein Fehler ist, melde das bitte <a href="/kontakt.html">hier<a/>.</p>
+          <p>Es wurden keine Pläne gefunden. Vielleicht musst Du etwas in den <a href="/preferences.html">Einstellungen<a/> ändern, z.B. eine andere Datenbank auswählen oder sie auf Standard zurücksetzten.</p>
+          <p>Wenn Du glaubst, dass das ein Fehler ist, melde es bitte <a href="/kontakt.html">hier<a/>.</p>
         </div>
       `;
       return;
