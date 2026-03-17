@@ -1,5 +1,5 @@
 {
-  "active": true,
+  "active": false,
   "title": "⚠️ WICHTIGE INFO ⚠️",
   "message": "Pläne nach morgen sind nun offiziell verfügbar. WICHTIG: die datenbank 'dsb-beta-database' wird nicht mehr aktualisiert, da die neuen Funktionen nun offiziell verfügbar sind. Bitte wechsle zur 'dsb-database' um alle Pläne zu sehen, oder setzte alle <a href='./preferences.html'>Einstellungen</a> zurück.",
   "lastUpdated": "27.02.2026"
