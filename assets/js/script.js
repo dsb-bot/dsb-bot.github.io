@@ -72,3 +72,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
   console.log("Navbar und Dropdowns initialisiert ✅");
 });
+
+function share() {
+    if (navigator.share) {
+        navigator.share({
+            title: document.title,
+            text: "Schau mal wie klasse! Das hier ist der Vertretungsplan, nur fancy und IMMER verfügbar.",
+            url: "https://dsb-bot.github.io"
+        });
+    } else {
+        alert("Teilen wird von diesem Browser nicht unterstützt.");
+    }
+}
