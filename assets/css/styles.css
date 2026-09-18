@@ -489,7 +489,13 @@ button:active {
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  padding-top: 10%;
+  box-sizing: border-box;
+  padding: 10vh 1rem;
+  overflow-y: auto;
+}
+
+body.popup-open {
+  overflow: hidden;
 }
 
 /* Popup-Box */
@@ -497,9 +503,11 @@ button:active {
   padding: 1rem;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   border-radius: 12px;
-  overflow: hidden;
+  overflow-y: auto;
   width: auto;
   max-width: 400px;
+  max-height: calc(100vh - 20vh);
+  box-sizing: border-box;
   position: relative;
   display: flex;
   flex-direction: column;

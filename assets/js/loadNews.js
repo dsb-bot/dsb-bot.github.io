@@ -30,11 +30,13 @@ function showMessagePopup(title, message, date = "") {
   document.getElementById("popup-date").textContent = date;
 
   popup.style.display = "flex"; // Overlay wird sichtbar
+  document.body.classList.add("popup-open");
 }
 
 function closeMessagePopup() {
   const popup = document.getElementById("message-popup");
   if (popup) popup.style.display = "none";
+  document.body.classList.remove("popup-open");
 }
 
 // --- Cookie-Funktionen ---
