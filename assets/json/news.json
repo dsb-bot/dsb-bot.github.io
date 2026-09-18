@@ -1,6 +1,6 @@
 {
-  "active": false,
-  "title": "⚠️ WICHTIGE INFO ⚠️",
-  "message": "Pläne nach morgen sind nun offiziell verfügbar. WICHTIG: die datenbank 'dsb-beta-database' wird nicht mehr aktualisiert, da die neuen Funktionen nun offiziell verfügbar sind. Bitte wechsle zur 'dsb-database' um alle Pläne zu sehen, oder setzte alle <a href='./preferences.html'>Einstellungen</a> zurück.",
-  "lastUpdated": "27.02.2026"
+  "active": true,
+  "title": "📱 Website als App speichern",
+  "message": "Du kannst diese Website wie eine App auf deinem Homescreen speichern!<br><br><b>iPhone (iOS):</b><br><b>Safari:</b> Tippe auf <b>„[↑] Teilen“</b> und unten auf <b>„[+] Zum Home-Bildschirm“</b>. Lasse „Als Web-App öffnen“ aktiviert. Bestätige mit <b>„Hinzufügen“</b>.<br><br><b>Android:</b><br>Öffne die Website in <b>Google Chrome</b>. Tippe oben rechts auf <b>⋮</b> und wähle <b>„Zum Startbildschirm hinzufügen“</b> oder <b>„App installieren“</b>. Bestätige anschließend die Auswahl.<br><br>Die Website befindet sich nun direkt auf deinem Homescreen und kann wie eine normale App geöffnet werden.",
+  "lastUpdated": "18.09.2026"
 }
