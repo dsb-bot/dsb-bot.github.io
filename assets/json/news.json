@@ -1,6 +1,7 @@
 {
   "active": true,
-  "title": "DSB-Bot als App speichern",
-  "message": "Du kannst diese Website wie eine App auf deinem Homescreen speichern!<br><br><b>iPhone (iOS/Safari):</b><br>Tippe auf „[↑] Teilen“ und unten auf „[+] Zum Home-Bildschirm“. Lasse „Als Web-App öffnen“ aktiviert. Bestätige mit „Hinzufügen“.<br><br><b>Android (Google Chrome):</b><br>Tippe oben rechts auf <b>⋮</b> und wähle „Zum Startbildschirm hinzufügen“ oder „App installieren“. Bestätige anschließend die Auswahl.<br><br><br><b>DSB-Bot schon mit Freunden geteilt?</b> <br> <div class=\"dropdown\" id=\"share-dropdown\"> <button class=\"dropdown-button\" onclick=\"share()\"><i class=\"fa fa-share-alt\"></i><span class=\"label\">Teilen</span></button></div>",
-  "lastUpdated": "18.09.2026"
+  "title": "⚠️⚠️ Wartungsarbeiten ⚠️⚠️",
+  "message": "Aktuel finden Wartungsarbeiten statt, die Website ist in wenigen Tagen wieder erreichbar.  ",
+  "message_old": "Du kannst diese Website wie eine App auf deinem Homescreen speichern!<br><br><b>iPhone (iOS/Safari):</b><br>Tippe auf „[↑] Teilen“ und unten auf „[+] Zum Home-Bildschirm“. Lasse „Als Web-App öffnen“ aktiviert. Bestätige mit „Hinzufügen“.<br><br><b>Android (Google Chrome):</b><br>Tippe oben rechts auf <b>⋮</b> und wähle „Zum Startbildschirm hinzufügen“ oder „App installieren“. Bestätige anschließend die Auswahl.<br><br><br><b>DSB-Bot schon mit Freunden geteilt?</b> <br> <div class=\"dropdown\" id=\"share-dropdown\"> <button class=\"dropdown-button\" onclick=\"share()\"><i class=\"fa fa-share-alt\"></i><span class=\"label\">Teilen</span></button></div>",
+  "lastUpdated": "23.11.2026"
 }
